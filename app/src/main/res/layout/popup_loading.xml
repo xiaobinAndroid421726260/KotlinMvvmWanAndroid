@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/shape_popup_state_background"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_width="106dp"
+    android:layout_height="96dp">
+
+    <ProgressBar
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminateTint="@color/white" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        android:text="正在加载..."/>
+
+</LinearLayout>

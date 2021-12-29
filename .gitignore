@@ -1,0 +1,27 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Project exclude paths
+/LocalPackage/AutoSize_aar/build/
+/LocalPackage/Banner_aar/build/
+/LocalPackage/CircleImageView_aar/build/
+/LocalPackage/ImmersionBar_aar/build/
+/LocalPackage/Immersionbar_Components_aar/build/
+/LocalPackage/ImmersionBar_Ktx_aar/build/
+/LocalPackage/LoadSir_aar/build/
+/LocalPackage/Luban_aar/build/
+/LocalPackage/SmartRefreshHeader_aar/build/
+/LocalPackage/SmartRefreshLayout_aar/build/

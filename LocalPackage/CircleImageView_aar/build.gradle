@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('circleimageview-3.1.0.aar'))

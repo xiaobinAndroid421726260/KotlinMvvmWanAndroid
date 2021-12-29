@@ -1,0 +1,97 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'version-catalog'
+}
+
+android {
+    compileSdk libs.versions.compilesdk.get().toInteger()
+
+    defaultConfig {
+        applicationId "com.kotlin.mvvm"
+        minSdk libs.versions.minsdk.get().toInteger()
+        targetSdk libs.versions.targetsdk.get().toInteger()
+        flavorDimensions "versionCode"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        ndk.abiFilters 'armeabi-v7a'
+    }
+
+    productFlavors {
+        publish {
+            applicationId "com.kotlin.mvvm"
+            versionCode libs.versions.versioncode.get().toInteger()
+            versionName libs.versions.versionname.get()
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+catalog {
+    versionCatalog {
+        from files('../libs.versions.toml')
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation libs.bundles.androidx
+    implementation libs.bundles.lifecycle
+    implementation libs.bundles.glide
+    implementation libs.bundles.retrofit
+    implementation libs.logging.interceptor
+
+    implementation libs.baserecyclerview
+    implementation libs.mmkv
+    implementation libs.basepopup
+    implementation libs.utilcodex
+    implementation libs.permissionx
+    implementation libs.rxandroid
+    implementation libs.rxbinding
+    implementation libs.tabLayout
+
+    // 头条适配
+    implementation project(path: ':LocalPackage:AutoSize_aar')
+    // Banner
+    implementation project(path: ':LocalPackage:Banner_aar')
+    // LoadSir
+    implementation project(path: ':LocalPackage:LoadSir_aar')
+    // circleimageview圆头像
+    implementation project(path: ':LocalPackage:CircleImageView_aar')
+    // 沉浸式状态栏基础依赖包 + fragment快速实现（可选）+ kotlin扩展（可选）
+    implementation project(path: ':LocalPackage:ImmersionBar_aar')
+    implementation project(path: ':LocalPackage:ImmersionBar_Components_aar')
+    implementation project(path: ':LocalPackage:ImmersionBar_Ktx_aar')
+    // 图片压缩
+    implementation project(path: ':LocalPackage:Luban_aar')
+    // 上拉刷新下拉加载
+    implementation project(path: ':LocalPackage:SmartRefreshLayout_aar')
+    implementation project(path: ':LocalPackage:SmartRefreshHeader_aar')
+}

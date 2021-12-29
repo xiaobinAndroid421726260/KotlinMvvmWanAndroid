@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#35464e</color>
+    <color name="colorPrimaryDark">#212a2f</color>
+    <color name="colorAccent">#35464e</color>
+    <color name="textColorPrimary">#616161</color>
+    <color name="viewBackground">@color/Grey800</color>
+    <color name="windowBackground">@color/Grey900</color>
+
+    <color name="line_divider">@color/Grey700</color>
+    <color name="list_divider">@color/Grey600</color>
+    <color name="mask_color">#111111</color>
+
+    <color name="common_color">@color/Grey300</color>
+    <color name="Grey300">#E0E0E0</color>
+    <color name="item_title">@color/Grey300</color>
+    <color name="item_author">@color/Grey500</color>
+    <color name="item_desc">@color/Grey500</color>
+    <color name="item_time">@color/Grey500</color>
+    <color name="item_date">@color/Grey500</color>
+    <color name="item_chapter">@color/Grey500</color>
+    <color name="item_nav_color_tv">@color/Grey500</color>
+    <color name="vertical_tab_layout_bg">@color/Grey800</color>
+    <color name="vertical_tab_layout_indicator_color">@color/Grey600</color>
+    <color name="item_flow_layout_bg">@color/Grey700</color>
+    <color name="arrow_color">@color/Grey400</color>
+    <color name="sticky_header_bg">#515151</color>
+
+    <color name="color_theme_text">#CCFFFFFF</color>//黑暗主题白色文字
+    <color name="accent_red">@color/colorAccent</color>
+    <color name="accent_pink">@color/colorAccent</color>
+    <color name="accent_orange">@color/colorAccent</color>
+    <color name="accent_pale_blue">@color/colorAccent</color>
+    <color name="accent_green">@color/colorAccent</color>
+    <color name="accent_cyan">@color/colorAccent</color>
+    <color name="accent_indigo">@color/colorAccent</color>
+    <color name="accent_purple">@color/colorAccent</color>
+    <color name="accent_brown">@color/colorAccent</color>
+    <color name="white">#ff2d2d2d</color>
+
+</resources>

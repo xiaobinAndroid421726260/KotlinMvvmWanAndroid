@@ -1,0 +1,30 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+rootProject.name = "KotlinMvvmWanAndroid"
+include ':app'
+include ':LocalPackage:AutoSize_aar'
+include ':LocalPackage:Banner_aar'
+include ':LocalPackage:LoadSir_aar'
+include ':LocalPackage:CircleImageView_aar'
+include ':LocalPackage:ImmersionBar_aar'
+include ':LocalPackage:ImmersionBar_Components_aar'
+include ':LocalPackage:ImmersionBar_Ktx_aar'
+include ':LocalPackage:Luban_aar'
+include ':LocalPackage:SmartRefreshLayout_aar'
+include ':LocalPackage:SmartRefreshHeader_aar'
+
+
+enableFeaturePreview('VERSION_CATALOGS')
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            from(files("libs.versions.toml"))
+        }
+    }
+}
