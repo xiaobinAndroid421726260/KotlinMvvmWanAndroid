@@ -6,9 +6,7 @@ import com.kotlin.mvvm.base.BaseViewModel
 import com.kotlin.mvvm.common.BaseListResponse
 import com.kotlin.mvvm.common.BaseResult
 import com.kotlin.mvvm.common.fold
-import com.kotlin.mvvm.ext.e
 import com.kotlin.mvvm.network.RetrofitFactory
-import com.kotlin.mvvm.ui.system.bean.Article
 import com.kotlin.mvvm.ui.system.bean.KnowBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
