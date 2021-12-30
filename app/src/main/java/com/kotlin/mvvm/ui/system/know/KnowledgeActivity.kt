@@ -3,14 +3,14 @@ package com.kotlin.mvvm.ui.system.know
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.blankj.utilcode.util.ActivityUtils
+import com.google.android.material.tabs.TabLayoutMediator
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.common.ScrollToTop
 import com.kotlin.mvvm.databinding.ActivityKnowledgeBinding
 import com.kotlin.mvvm.ext.getAppThemeColor
-import com.kotlin.mvvm.ext.setTaLayoutViewTextColor
 import com.kotlin.mvvm.ext.setToolbarBackColor
 import com.kotlin.mvvm.ui.system.bean.Children
 import java.io.Serializable
@@ -18,8 +18,7 @@ import java.io.Serializable
 class KnowledgeActivity : BaseActivity() {
 
     private val binding by lazy { ActivityKnowledgeBinding.inflate(layoutInflater) }
-    private var mAdapter: FragmentStatePagerAdapter? = null
-    private val mFragment = arrayListOf<Fragment>()
+    private var mAdapter: FragmentStateAdapter? = null
     private var datas = mutableListOf<Children>()
     private var name: String? = null
 
@@ -52,24 +51,25 @@ class KnowledgeActivity : BaseActivity() {
                 R.drawable.ic_arrow_black else R.drawable.ic_arrow_white
         )
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
+
+        val mFragment = arrayListOf<Fragment>()
         val mTitles = arrayListOf<String>()
         for (data in datas) {
             mTitles.add(data.name)
             mFragment.add(KnowledgeFragment.newInstance(data.id))
         }
-        mAdapter = object : FragmentStatePagerAdapter(
-            supportFragmentManager,
-            BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-        ) {
-            override fun getCount() = mFragment.size
+        mAdapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount() = mFragment.size
 
-            override fun getItem(position: Int) = mFragment[position]
+            override fun createFragment(position: Int) = mFragment[position]
         }
-        binding.viewPager.offscreenPageLimit = mFragment.size
-        binding.viewPager.adapter = mAdapter
-        binding.tabLayout.setViewPager(binding.viewPager, mTitles.toTypedArray())
+        binding.viewPager2.adapter = mAdapter
+        binding.viewPager2.offscreenPageLimit = mFragment.size
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+            tab.text = mTitles[position]
+        }.attach()
         binding.actionButton.setOnClickListener {
-            val fragment = mAdapter?.getItem(binding.viewPager.currentItem)
+            val fragment = mAdapter?.createFragment(binding.viewPager2.currentItem)
             if (fragment is ScrollToTop) {
                 fragment.scrollToTop()
             }

@@ -2,8 +2,8 @@ package com.kotlin.mvvm.ui.system
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentStatePagerAdapter
-import com.flyco.tablayout.listener.OnTabSelectListener
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
 import com.kotlin.mvvm.databinding.FragmentSystemBinding
@@ -17,7 +17,7 @@ import com.kotlin.mvvm.databinding.FragmentSystemBinding
 class SystemFragment : BaseFragment(), ScrollToTop {
 
     private val binding by lazy { FragmentSystemBinding.inflate(layoutInflater) }
-    private var mAdapter: FragmentStatePagerAdapter? = null
+    private var mAdapter: FragmentStateAdapter? = null
     private val mFragments = arrayListOf<Fragment>().apply {
         add(SystemOneFragment())
         add(SystemTwoFragment())
@@ -30,30 +30,24 @@ class SystemFragment : BaseFragment(), ScrollToTop {
     override fun getContentView() = binding.root
 
     override fun initView(bundle: Bundle?) {
-        binding.tabLayout.setOnTabSelectListener(object : OnTabSelectListener {
-            override fun onTabSelect(position: Int) {
-                binding.viewPager.currentItem = position
-            }
+        mAdapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount() = mFragments.size
 
-            override fun onTabReselect(position: Int) {
-
-            }
-        })
-        mAdapter = object : FragmentStatePagerAdapter(childFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-            override fun getCount() = mFragments.size
-
-            override fun getItem(position: Int) = mFragments[position]
+            override fun createFragment(position: Int) = mFragments[position]
         }
-        binding.viewPager.adapter = mAdapter
-        binding.tabLayout.setViewPager(binding.viewPager, mTitles.toTypedArray())
+        binding.viewPager2.adapter = mAdapter
+        binding.viewPager2.offscreenPageLimit = mFragments.size
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+            tab.text = mTitles[position]
+        }.attach()
     }
 
     override fun initData() {
     }
 
     override fun scrollToTop() {
-        val fragment = mAdapter?.getItem(binding.viewPager.currentItem)
-        if (fragment is ScrollToTop){
+        val fragment = mAdapter?.createFragment(binding.viewPager2.currentItem)
+        if (fragment is ScrollToTop) {
             fragment.scrollToTop()
         }
     }

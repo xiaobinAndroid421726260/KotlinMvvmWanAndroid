@@ -1,12 +1,15 @@
 package com.kotlin.mvvm.ui.wechat
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.android.material.tabs.TabLayout
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
 import com.kotlin.mvvm.ext.setTaLayoutViewTextColor
 import com.kotlin.mvvm.databinding.FragmentWechatBinding
+import com.kotlin.mvvm.ui.wechat.bean.WechatBean
 
 /**
  * description:
@@ -18,31 +21,38 @@ class WechatFragment : BaseFragment(), ScrollToTop {
 
     private val binding by lazy { FragmentWechatBinding.inflate(layoutInflater) }
     private val mViewModel by viewModels<WechatViewModel>()
-    private val mAdapter by lazy { FragmentAdapter(childFragmentManager) }
+    private var mAdapter: FragmentStateAdapter? = null
 
     override fun getContentView() = binding.root
 
     override fun initView(bundle: Bundle?) {
-        binding.viewPager.adapter = mAdapter
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                binding.viewPager.currentItem = tab.position
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-            }
-        })
         mViewModel.mWechatBean.observe(this) {
             if (it.isNotEmpty() && it.size > 0) {
-                binding.viewPager.offscreenPageLimit = it.size
-                mAdapter.addData(it)
+                onCreateTagFragment(it)
             }
         }
         mViewModel.getWechatArticleJson()
+    }
+
+    private fun onCreateTagFragment(dataBean: MutableList<WechatBean>) {
+        val mFragments = arrayListOf<Fragment>()
+        val mTitles = arrayListOf<String>()
+        for (data in dataBean) {
+            mTitles.add(data.name)
+            mFragments.add(WechatViewPagerFragment.newInstance(data.id))
+        }
+        mAdapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount() = mFragments.size
+
+            override fun createFragment(position: Int) = mFragments[position]
+        }
+        binding.viewPager2.adapter = mAdapter
+        binding.viewPager2.offscreenPageLimit = dataBean.size
+        val tabLayoutMediator =
+            TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+                tab.text = mTitles[position]
+            }
+        tabLayoutMediator.attach()
     }
 
     override fun initData() {
@@ -50,8 +60,8 @@ class WechatFragment : BaseFragment(), ScrollToTop {
     }
 
     override fun scrollToTop() {
-        val fragment = mAdapter.getItem(binding.viewPager.currentItem)
-        if (fragment is ScrollToTop){
+        val fragment = mAdapter?.createFragment(binding.viewPager2.currentItem)
+        if (fragment is ScrollToTop) {
             fragment.scrollToTop()
         }
     }
