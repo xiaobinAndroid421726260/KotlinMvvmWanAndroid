@@ -34,7 +34,7 @@ class WebViewActivity : BaseActivity() {
         )
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         title?.let { binding.tvTitle.text = it }
-        url?.let { binding.x5webview.loadUrl(it) }
+        url?.let { binding.x5WebView.loadUrl(it) }
     }
 
     override fun initData() {

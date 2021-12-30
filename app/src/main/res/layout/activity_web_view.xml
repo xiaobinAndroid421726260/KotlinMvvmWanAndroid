@@ -7,7 +7,7 @@
     tools:context=".ui.WebViewActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbarlayout"
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -36,7 +36,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.kotlin.mvvm.view.X5WebView
-        android:id="@+id/x5webview"
+        android:id="@+id/x5WebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
