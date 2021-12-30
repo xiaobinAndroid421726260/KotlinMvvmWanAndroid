@@ -43,6 +43,7 @@ class SystemFragment : BaseFragment(), ScrollToTop {
     }
 
     override fun initData() {
+
     }
 
     override fun scrollToTop() {
