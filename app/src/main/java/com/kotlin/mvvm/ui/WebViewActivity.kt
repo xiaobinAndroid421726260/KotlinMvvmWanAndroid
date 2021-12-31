@@ -4,11 +4,8 @@ import android.graphics.Color
 import android.os.Bundle
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
-import com.kotlin.mvvm.ext.setToolbarBackColor
 import com.kotlin.mvvm.databinding.ActivityWebViewBinding
-import com.kotlin.mvvm.ext.getAppThemeColor
-import com.kotlin.mvvm.ext.getNightMode
-import com.kotlin.mvvm.ext.visible
+import com.kotlin.mvvm.ext.*
 
 class WebViewActivity : BaseActivity() {
 
@@ -29,7 +26,7 @@ class WebViewActivity : BaseActivity() {
         binding.tvTitle.text = "正在加载中..."
         binding.tvTitle.visible()
         binding.toolbar.setNavigationIcon(
-            if (getAppThemeColor() == R.color.white)
+            if (getAppThemeColor() == Color.WHITE)
                 R.drawable.ic_arrow_black else R.drawable.ic_arrow_white
         )
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
@@ -42,7 +39,7 @@ class WebViewActivity : BaseActivity() {
             binding.tvTitle.setTextColor(Color.WHITE)
         } else {
             val color = getAppThemeColor()
-            binding.tvTitle.setTextColor(if (color == R.color.white) Color.BLACK else Color.WHITE)
+            binding.tvTitle.setTextColor(if (color == Color.WHITE) Color.BLACK else Color.WHITE)
         }
         setToolbarBackColor(this, binding.toolbar, null)
     }

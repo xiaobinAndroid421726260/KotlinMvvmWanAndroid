@@ -8,6 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
 import com.kotlin.mvvm.databinding.FragmentProjectBinding
+import com.kotlin.mvvm.ext.setTaLayoutViewTextColor
 import com.kotlin.mvvm.ui.project.bean.ProjectBean
 
 /**
@@ -55,7 +56,7 @@ class ProjectFragment : BaseFragment(), ScrollToTop {
     }
 
     override fun initData() {
-
+        setTaLayoutViewTextColor(binding.tabLayout)
     }
 
     override fun scrollToTop() {

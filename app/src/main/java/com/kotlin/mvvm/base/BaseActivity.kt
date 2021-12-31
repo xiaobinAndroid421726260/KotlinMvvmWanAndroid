@@ -3,22 +3,23 @@ package com.kotlin.mvvm.base
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.content.res.Resources
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import com.blankj.utilcode.util.ToastUtils
+import com.gyf.immersionbar.ImmersionBar
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.common.UiState
-import com.kotlin.mvvm.ext.e
-import com.kotlin.mvvm.ext.resourceId
 import com.kotlin.mvvm.popup.base.LoadingView
-import com.gyf.immersionbar.ktx.immersionBar
 import com.jakewharton.rxbinding4.view.clicks
+import com.kotlin.mvvm.ext.*
 import com.permissionx.guolindev.PermissionX
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,6 +38,7 @@ import java.util.concurrent.TimeUnit
 abstract class BaseActivity : AppCompatActivity(), CustomAdapt {
 
     protected val mHandler = Handler(Looper.getMainLooper())
+    protected var mAppThemeColor = getAppThemeColor()
     private var isFirstLoad = true
     private var mDisposable: CompositeDisposable? = null
     protected var savedInstanceState: Bundle? = null
@@ -54,7 +56,6 @@ abstract class BaseActivity : AppCompatActivity(), CustomAdapt {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setWindowConfigure()
         setContentView(getContentView())
-//        setRootViewLayout()
         initImmersionBar()
         initView(intent.extras)
         ToastUtils.getDefaultMaker().setGravity(Gravity.CENTER, 0, 0)
@@ -102,12 +103,27 @@ abstract class BaseActivity : AppCompatActivity(), CustomAdapt {
             }
     }
 
-    open fun initImmersionBar() {
-        immersionBar {
-            statusBarColor(
-                TypedValue().resourceId(R.attr.colorPrimary, theme)
-            ).fitsSystemWindows(true).autoStatusBarDarkModeEnable(true, 0.2f)
+    open fun initImmersionBar(
+        @ColorInt statusBarColor: Int = ContextCompat.getColor(
+            this,
+            R.color.colorPrimary
+        ), isDarkFont: Boolean = false
+    ) {
+        ImmersionBar.with(this)
+            .statusBarDarkFont(isDarkFont)
+            .fitsSystemWindows(true) //使用该属性,必须指定状态栏颜色
+            .statusBarColorInt(statusBarColor)
+            .init()
+    }
+
+    open fun initThemeColor() {
+        mAppThemeColor = if (getNightMode()) {
+            ContextCompat.getColor(this, R.color.colorPrimary)
+        } else {
+            getAppThemeColor()
         }
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(mAppThemeColor))
+        initImmersionBar(mAppThemeColor, mAppThemeColor == R.color.white)
     }
 
     /**

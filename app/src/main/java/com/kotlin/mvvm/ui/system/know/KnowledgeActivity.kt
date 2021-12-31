@@ -1,5 +1,6 @@
 package com.kotlin.mvvm.ui.system.know
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.common.ScrollToTop
 import com.kotlin.mvvm.databinding.ActivityKnowledgeBinding
 import com.kotlin.mvvm.ext.getAppThemeColor
+import com.kotlin.mvvm.ext.setTaLayoutViewTextColor
 import com.kotlin.mvvm.ext.setToolbarBackColor
 import com.kotlin.mvvm.ui.system.bean.Children
 import java.io.Serializable
@@ -39,15 +41,16 @@ class KnowledgeActivity : BaseActivity() {
             name = getString("name")
             datas = getSerializable("data") as MutableList<Children>
         }
+        setSupportActionBar(binding.toolbar)
         binding.toolbar.title = name
         binding.toolbar.setTitleTextColor(
-            if (getAppThemeColor() == R.color.white) ContextCompat.getColor(
+            if (getAppThemeColor() == Color.WHITE) ContextCompat.getColor(
                 this,
                 R.color.black
             ) else ContextCompat.getColor(this, R.color.white)
         )
         binding.toolbar.setNavigationIcon(
-            if (getAppThemeColor() == R.color.white)
+            if (getAppThemeColor() == Color.WHITE)
                 R.drawable.ic_arrow_black else R.drawable.ic_arrow_white
         )
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
@@ -78,5 +81,6 @@ class KnowledgeActivity : BaseActivity() {
 
     override fun initData() {
         setToolbarBackColor(this, binding.toolbar, binding.actionButton)
+        setTaLayoutViewTextColor(binding.tabLayout)
     }
 }

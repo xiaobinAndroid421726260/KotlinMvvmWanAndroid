@@ -10,17 +10,15 @@ import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.common.ScrollToTop
-import com.kotlin.mvvm.ext.setToolbarBackColor
 import com.kotlin.mvvm.databinding.ActivityMainBinding
-import com.kotlin.mvvm.ext.loadFragments
-import com.kotlin.mvvm.ext.onClick
-import com.kotlin.mvvm.ext.showHideFragment
+import com.kotlin.mvvm.ext.*
 import com.kotlin.mvvm.ui.home.HomeFragment
 import com.kotlin.mvvm.ui.project.ProjectFragment
 import com.kotlin.mvvm.ui.setting.SettingActivity
 import com.kotlin.mvvm.ui.square.SquareFragment
 import com.kotlin.mvvm.ui.system.SystemFragment
 import com.kotlin.mvvm.ui.wechat.WechatFragment
+import java.lang.Exception
 
 class MainActivity : BaseActivity() {
 
@@ -53,6 +51,7 @@ class MainActivity : BaseActivity() {
 
     override fun initView(bundle: Bundle?) {
         setSupportActionBar(binding.toolbar)
+        setBottomNavigationItemColor()
         loadFragments(R.id.fl_container, FRAGMENT_HOME, mFragments)
         showFragment(FRAGMENT_HOME)
         savedInstanceState?.apply {
@@ -79,6 +78,16 @@ class MainActivity : BaseActivity() {
 
     override fun initData() {
         setToolbarBackColor(this, binding.toolbar, binding.actionButton)
+        // 重新可见时判断BottomNavigation颜色是否根据主题变化，然后重新创建
+        if (getNavBar() && getNavBarColor()) {
+            setNavBarColor(false)
+            setBottomNavigationItemColor()
+            recreateActivity()
+        }
+    }
+
+    private fun setBottomNavigationItemColor(){
+        setBottomNavigationItemColor(this, binding.bottomNavigation)
     }
 
     private fun showFragment(index: Int) {
@@ -102,6 +111,16 @@ class MainActivity : BaseActivity() {
     }
 
     override fun recreate() {
+        try {
+            val transaction = supportFragmentManager.beginTransaction()
+            val fragments = supportFragmentManager.fragments
+            for (fragment in fragments) {
+                transaction.remove(fragment)
+            }
+            transaction.commitAllowingStateLoss()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         super.recreate()
     }
 

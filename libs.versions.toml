@@ -58,6 +58,8 @@ permissionx = "com.guolindev.permissionx:permissionx:1.6.0"
 rxbinding = "com.jakewharton.rxbinding4:rxbinding:4.0.0"
 # flycoTabLayout
 tabLayout = "io.github.h07000223:flycoTabLayout:3.0.0"
+# material-dialogs
+commons-dialogs = "com.afollestad.material-dialogs:commons:0.9.6.0"
 
 # okhttp 日志拦截器
 logging-interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.2"

@@ -2,7 +2,9 @@ package com.kotlin.mvvm.base
 
 import android.app.Application
 import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.LogUtils
 import com.kingja.loadsir.core.LoadSir
 import com.kotlin.mvvm.R
@@ -12,8 +14,6 @@ import com.kotlin.mvvm.common.loadsir.LoadingCallback
 import com.kotlin.mvvm.ext.getAppThemeColor
 import com.kotlin.mvvm.ext.getNightMode
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator
-import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.tencent.mmkv.MMKV
@@ -33,10 +33,10 @@ class App : Application() {
                 refreshLayout.setPrimaryColorsId(R.color.colorPrimary, R.color.white)
             } else {
                 val color = getAppThemeColor()
-                if (color == R.color.white) {
-                    refreshLayout.setPrimaryColorsId(color, R.color.black)
+                if (color == Color.WHITE) {
+                    refreshLayout.setPrimaryColors(color, ContextCompat.getColor(this, R.color.black))
                 } else {
-                    refreshLayout.setPrimaryColorsId(color, R.color.white)
+                    refreshLayout.setPrimaryColors(color, ContextCompat.getColor(this, R.color.white))
                 }
             }
             ClassicsHeader(context)

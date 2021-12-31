@@ -10,6 +10,12 @@
 
     <string name="action_search">搜索</string>
     <string name="action_setting">设置</string>
+    <string name="choose_theme_color">主题颜色</string>
+    <string name="choose_theme_color_summary">自定义主题颜色</string>
+    <string name="cancel">取消</string>
+    <string name="back">返回</string>
+    <string name="done">完成</string>
+    <string name="custom">自定义</string>
 
 
     <string name="FloatingActionButtonBehavior">com.kotlin.mvvm.view.FloatingActionButtonBehavior</string>

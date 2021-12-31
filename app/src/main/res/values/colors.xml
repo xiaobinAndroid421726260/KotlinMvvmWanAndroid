@@ -8,11 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+<!--    <color name="colorPrimary">@color/colorAccent</color>-->
     <color name="colorPrimary">@color/accent_pale_blue</color>
     <color name="colorPrimaryDark">@color/purple_700</color>
-    <color name="colorAccent">@color/colorPrimary</color>
-<!--    <color name="colorAccent">#35464e</color>-->
+<!--    <color name="colorAccent">@color/colorPrimary</color>-->
+    <color name="colorAccent">#35464e</color>
 
+    <color name="nav_theme_color">#DD000000</color>
     <color name="color_theme_text">#FFFFFF</color>//亮色主题白色文字
 
     <color name="arrow_color">@color/Grey700</color>
