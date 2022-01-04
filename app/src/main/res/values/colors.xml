@@ -16,6 +16,7 @@
 
     <color name="nav_theme_color">#DD000000</color>
     <color name="color_theme_text">#FFFFFF</color>//亮色主题白色文字
+    <color name="color_white">#FFFFFFFF</color>
 
     <color name="arrow_color">@color/Grey700</color>
 

@@ -28,6 +28,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/Green</item>
+    </style>
+
     <style name="MyTabLayoutStyle" parent="Base.Widget.Design.TabLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

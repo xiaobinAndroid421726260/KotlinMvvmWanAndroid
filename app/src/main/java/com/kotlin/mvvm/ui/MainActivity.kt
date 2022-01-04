@@ -51,7 +51,6 @@ class MainActivity : BaseActivity() {
 
     override fun initView(bundle: Bundle?) {
         setSupportActionBar(binding.toolbar)
-        setBottomNavigationItemColor()
         loadFragments(R.id.fl_container, FRAGMENT_HOME, mFragments)
         showFragment(FRAGMENT_HOME)
         savedInstanceState?.apply {
@@ -78,10 +77,10 @@ class MainActivity : BaseActivity() {
 
     override fun initData() {
         setToolbarBackColor(this, binding.toolbar, binding.actionButton)
+        setBottomNavigationItemColor()
         // 重新可见时判断BottomNavigation颜色是否根据主题变化，然后重新创建
         if (getNavBar() && getNavBarColor()) {
             setNavBarColor(false)
-            setBottomNavigationItemColor()
             recreateActivity()
         }
     }

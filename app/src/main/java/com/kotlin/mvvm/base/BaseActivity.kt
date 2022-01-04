@@ -3,6 +3,7 @@ package com.kotlin.mvvm.base
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
@@ -123,7 +124,7 @@ abstract class BaseActivity : AppCompatActivity(), CustomAdapt {
             getAppThemeColor()
         }
         supportActionBar?.setBackgroundDrawable(ColorDrawable(mAppThemeColor))
-        initImmersionBar(mAppThemeColor, mAppThemeColor == R.color.white)
+        initImmersionBar(mAppThemeColor, mAppThemeColor == Color.WHITE)
     }
 
     /**

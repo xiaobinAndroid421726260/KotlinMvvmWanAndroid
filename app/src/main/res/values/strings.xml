@@ -16,7 +16,10 @@
     <string name="back">返回</string>
     <string name="done">完成</string>
     <string name="custom">自定义</string>
+    <string name="current_version">当前版本</string>
 
+    <string name="wan_android">https://www.wanandroid.com</string>
+    <string name="git_url_wan_android">https://github.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid.git</string>
 
     <string name="FloatingActionButtonBehavior">com.kotlin.mvvm.view.FloatingActionButtonBehavior</string>
 

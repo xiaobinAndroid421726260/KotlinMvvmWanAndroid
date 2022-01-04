@@ -30,7 +30,11 @@ fun setToolbarBackColor(
     toolbar: Toolbar,
     actionButton: FloatingActionButton?
 ) {
-    val color = getAppThemeColor()
+    val color = if (getNightMode()) {
+        ContextCompat.getColor(activity, R.color.colorPrimary)
+    } else {
+        getAppThemeColor()
+    }
     if (getNightMode()) {
         setToolbarWhiteExceptColor(activity, toolbar, color)
     } else {
