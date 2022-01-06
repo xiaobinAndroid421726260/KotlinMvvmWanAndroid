@@ -11,17 +11,38 @@
         <item name="android:windowExitAnimation">@anim/fade_out</item>
     </style>
 
-    <!--启动页面，解决黑白屏的问题-->
-    <style name="launchTheme">
-        <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:background">@color/colorPrimary</item>
+    <style name="SplashScreenTheme.Base" parent="Theme.SplashScreen">
+        <item name="android:statusBarColor">@color/colorAccent</item>
+        <!--        <item name="android:navigationBarColor">@color/colorAccent</item>-->
+        <!--        <item name="android:windowLightNavigationBar">false</item>-->
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- animation duration-->
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <!-- screen background color -->
+        <item name="windowSplashScreenBackground">@color/colorAccent</item>
+        <item name="postSplashScreenTheme">@style/launchTheme</item>
     </style>
 
-    <style name="AppTheme" parent="BaseAppTheme.NoActionBar"></style>
+    <!--启动页面，解决黑白屏的问题-->
+    <style name="launchTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="SplashScreenTheme" parent="SplashScreenTheme.Base">
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+    </style>
+
+    <!--    <style name="SplashScreenTheme" parent="SplashScreenTheme.Base">-->
+    <!--        &lt;!&ndash; animated icon &ndash;&gt;-->
+    <!--        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_kotlin_hero_new_animated_total</item>-->
+    <!--        &lt;!&ndash; icon background color&ndash;&gt;-->
+    <!--        <item name="android:windowSplashScreenIconBackgroundColor">@color/iconBackgroundColor</item>-->
+    <!--        &lt;!&ndash; brand image&ndash;&gt;-->
+    <!--        <item name="android:windowSplashScreenBrandingImage">@drawable/ic_brand_tm_bold_white</item>-->
+    <!--    </style>-->
 
     <style name="BaseAppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -29,8 +50,8 @@
     </style>
 
     <style name="MyCheckBox" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@color/colorPrimary</item>
-        <item name="colorControlActivated">@color/Green</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
     <style name="MyTabLayoutStyle" parent="Base.Widget.Design.TabLayout">
@@ -39,7 +60,10 @@
         <item name="android:background">?attr/colorPrimary</item>
         <item name="tabIndicatorColor">@color/white</item>
         <item name="tabIndicatorHeight">3dp</item>
+        <item name="tabMode">scrollable</item>
         <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextColor">@color/Grey300</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="tabTextAppearance">@style/MyTabTextAppearance</item>
     </style>
 
@@ -47,6 +71,35 @@
         <item name="android:textSize">14dp</item>
         <item name="textAllCaps">false</item>
         <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+    <!--  登录注册输入框  -->
+    <style name="text_login_inputLayout" parent="@style/Widget.Design.TextInputLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="hintTextAppearance">@style/hint_text</item>
+        <item name="errorEnabled">true</item>
+        <item name="errorTextAppearance">@style/error_text</item>
+    </style>
+
+    <style name="login_inputLayout_theme" parent="Theme.AppCompat.Light">
+        <!-- 默认状态状态设置底线颜色（未获取焦点） -->
+        <item name="colorControlNormal">@color/color_999999</item>
+        <!--高亮时-->
+        <item name="colorControlHighlight">@color/black</item>
+        <!-- 选中时的底线颜色（获取焦点） -->
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="hint_text">
+        <item name="android:textColor">@color/color_999999</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="error_text">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">50dp</item>
     </style>
 
 </resources>

@@ -38,7 +38,7 @@
                     android:paddingEnd="4dp"
                     android:paddingBottom="2dp"
                     android:text="置顶"
-                    android:textColor="@color/Red"
+                    android:textColor="@color/accent_red"
                     android:textSize="11dp" />
 
                 <TextView
@@ -52,7 +52,7 @@
                     android:paddingEnd="4dp"
                     android:paddingBottom="2dp"
                     android:text="新"
-                    android:textColor="@color/Red"
+                    android:textColor="@color/accent_red"
                     android:textSize="11dp"/>
 
                 <TextView

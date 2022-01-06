@@ -7,5 +7,5 @@ package com.kotlin.mvvm.common
  * @Date 2021/11/1 10:29
  */
 enum class UiState {
-    Loading, LoadEnd, LoadError, LoadComplete
+    LoadDefault, Loading, LoadEnd, LoadError, LoadComplete
 }

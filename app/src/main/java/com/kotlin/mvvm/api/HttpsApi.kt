@@ -14,6 +14,15 @@ object HttpsApi {
 
     const val GANK_IO_URL = "https://gank.io"
 
+    // 登录
+    const val login: String = "/user/login"
+
+    // 注册
+    const val register: String = "/user/register"
+
+    // 退出登录
+    const val logout: String = "/user/logout/json"
+
     // 首页文章列表 banner
     const val banner: String =  "/banner/json"
 

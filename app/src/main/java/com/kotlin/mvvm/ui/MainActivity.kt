@@ -131,6 +131,7 @@ class MainActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
             ToastUtils.showShort("跳转搜索")
+//            startLoginActivity()
             return true
         } else if (item.itemId == R.id.action_setting) {
             ActivityUtils.startActivity(SettingActivity::class.java)

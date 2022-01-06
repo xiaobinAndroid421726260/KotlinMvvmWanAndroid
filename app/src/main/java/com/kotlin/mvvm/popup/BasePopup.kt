@@ -1,12 +1,10 @@
-package com.kotlin.mvvm.popup.base
+package com.kotlin.mvvm.popup
 
-import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.Fragment
 import com.kotlin.mvvm.R
 import razerdp.basepopup.BasePopupWindow
 
@@ -16,24 +14,11 @@ import razerdp.basepopup.BasePopupWindow
  * @author Db_z
  * @Date 2021/10/11 10:57
  */
-open class BasePopup : BasePopupWindow {
+open class BasePopup (context: Context) : BasePopupWindow(context) {
 
     private val mHandler = Handler(Looper.getMainLooper())
     private var dismissWithRunnable: Runnable? = null
     private var mMap: Map<String, Any>? = null
-
-    constructor(context: Context) : super(context) {
-    }
-
-    constructor(fragment: Fragment) : super(fragment) {
-    }
-
-    constructor(dialog: Dialog) : super(dialog) {
-    }
-
-    init {
-        setBackgroundColor(Color.TRANSPARENT)
-    }
 
     open fun setAnimationBottom(): BasePopupWindow? {
         showAnimation = AnimationUtils.loadAnimation(context, R.anim.dialog_bottom_in)

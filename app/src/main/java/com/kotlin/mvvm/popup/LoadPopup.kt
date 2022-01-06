@@ -1,6 +1,7 @@
-package com.kotlin.mvvm.popup.base
+package com.kotlin.mvvm.popup
 
 import android.content.Context
+import android.graphics.Color
 import android.view.Gravity
 import com.kotlin.mvvm.R
 
@@ -13,6 +14,7 @@ import com.kotlin.mvvm.R
 class LoadPopup(context: Context) : BasePopup(context) {
 
     init {
+        setBackgroundColor(Color.TRANSPARENT)
         setContentView(R.layout.popup_loading)
         popupGravity = Gravity.CENTER
         setOutSideDismiss(false)

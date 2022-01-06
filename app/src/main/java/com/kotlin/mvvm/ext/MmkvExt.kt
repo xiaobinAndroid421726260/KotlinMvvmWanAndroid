@@ -1,6 +1,5 @@
 package com.kotlin.mvvm.ext
 
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.App
@@ -16,7 +15,7 @@ private const val THEME = "theme"
 private const val NAV_BAR = "nav_bar"
 private const val NAV_BAR_COLOR = "nav_bar_color"
 private const val KEY_NIGHT_MODE = "key_night_mode"
-private const val SAVE_NIGHT_MODE = "save_night_mode"
+private const val SAVE_USER = "save_user"
 
 fun setAppThemeColor(theme: Int) {
     MMKV.defaultMMKV().putInt(THEME, theme)
@@ -42,8 +41,8 @@ fun setNavBarColor(isNavBarColor: Boolean){
 
 fun getNavBarColor() = MMKV.defaultMMKV().getBoolean(NAV_BAR_COLOR, false)
 
-fun saveLastNightMode(theme: Int) {
-    MMKV.defaultMMKV().putInt(SAVE_NIGHT_MODE, theme)
+fun saveUser(userJson: String) {
+    MMKV.defaultMMKV().putString(SAVE_USER, userJson)
 }
 
-fun getLastNightMode() = MMKV.defaultMMKV().getInt(SAVE_NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_NO)
+fun getUser() = MMKV.defaultMMKV().getString(SAVE_USER, "")

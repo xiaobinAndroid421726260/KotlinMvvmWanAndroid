@@ -4,18 +4,16 @@ import com.kotlin.mvvm.common.BaseListResponse
 import com.kotlin.mvvm.common.BaseResponse
 import com.kotlin.mvvm.ui.home.bean.BannerBean
 import com.kotlin.mvvm.ui.home.bean.HomeBean
+import com.kotlin.mvvm.ui.login.bean.LoginBean
 import com.kotlin.mvvm.ui.project.bean.ProjectBean
 import com.kotlin.mvvm.ui.project.bean.ProjectPagerBean
 import com.kotlin.mvvm.ui.square.SquareBean
-import com.kotlin.mvvm.ui.system.bean.Article
 import com.kotlin.mvvm.ui.system.bean.KnowBean
 import com.kotlin.mvvm.ui.system.bean.NaviBean
 import com.kotlin.mvvm.ui.system.bean.SystemBean
 import com.kotlin.mvvm.ui.wechat.bean.WechatBean
 import com.kotlin.mvvm.ui.wechat.bean.WechatPagerBean
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * description:
@@ -24,6 +22,33 @@ import retrofit2.http.Query
  * @Date 2021/12/1 17:06
  */
 interface Api {
+
+    /**
+     * 登录
+     */
+    @FormUrlEncoded
+    @POST(HttpsApi.login)
+    suspend fun login(
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): BaseResponse<LoginBean>
+
+    /**
+     * 注册
+     */
+    @FormUrlEncoded
+    @POST(HttpsApi.register)
+    suspend fun register(
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("repassword") rePassword: String
+    ): BaseResponse<LoginBean>
+
+    /**
+     * 退出登录
+     */
+    @GET(HttpsApi.logout)
+    suspend fun logout(): BaseResponse<String>
 
     /**
      * 首页banner

@@ -8,209 +8,236 @@
     android:background="@color/viewBackground"
     tools:context=".ui.setting.SettingActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_layout"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-        </androidx.appcompat.widget.Toolbar>
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
 
-    </com.google.android.material.appbar.AppBarLayout>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/ll_theme"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
+                </androidx.appcompat.widget.Toolbar>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_weight="1"
-            android:text="主题颜色"
-            android:textColor="@color/item_title"
-            android:textSize="16dp" />
+            </com.google.android.material.appbar.AppBarLayout>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/view_theme"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_marginEnd="15dp" />
+            <LinearLayout
+                android:id="@+id/ll_theme"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:text="主题颜色"
+                    android:textColor="@color/item_title"
+                    android:textSize="16dp" />
 
-    <View
-        android:id="@+id/view_divider_theme"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/list_divider"
-        app:layout_constraintTop_toBottomOf="@+id/ll_theme" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/view_theme"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginEnd="15dp" />
 
-    <LinearLayout
-        android:id="@+id/ll_dark_mode"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/view_divider_theme">
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_weight="1"
-            android:text="深色模式"
-            android:textColor="@color/item_title"
-            android:textSize="16dp" />
+            <View
+                android:id="@+id/view_divider_theme"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/list_divider"
+                app:layout_constraintTop_toBottomOf="@+id/ll_theme" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_dark_mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:text="标准模式"
-            android:textColor="@color/item_title"
-            android:textSize="15dp" />
+            <LinearLayout
+                android:id="@+id/ll_dark_mode"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/view_divider_theme">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:src="@drawable/ic_arrow_right_24dp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:text="深色模式"
+                    android:textColor="@color/item_title"
+                    android:textSize="16dp" />
 
-    </LinearLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_dark_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="标准模式"
+                    android:textColor="@color/item_title"
+                    android:textSize="15dp" />
 
-    <View
-        android:id="@+id/view_divider_dark_mode"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/list_divider"
-        app:layout_constraintTop_toBottomOf="@+id/ll_dark_mode" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_arrow_right_24dp" />
 
-    <LinearLayout
-        android:id="@+id/ll_navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/view_divider_dark_mode">
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_weight="1"
-            android:text="导航栏颜色"
-            android:textColor="@color/item_title"
-            android:textSize="16dp" />
+            <View
+                android:id="@+id/view_divider_dark_mode"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/list_divider"
+                app:layout_constraintTop_toBottomOf="@+id/ll_dark_mode" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:text="跟随主题颜色"
-            android:textColor="@color/item_title"
-            android:textSize="15dp" />
+            <LinearLayout
+                android:id="@+id/ll_navigation_bar"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/view_divider_dark_mode">
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:checked="true"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:text="导航栏颜色"
+                    android:textColor="@color/item_title"
+                    android:textSize="16dp" />
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="跟随主题颜色"
+                    android:textColor="@color/item_title"
+                    android:textSize="15dp" />
 
-    <View
-        android:id="@+id/view_divider_navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/list_divider"
-        app:layout_constraintTop_toBottomOf="@+id/ll_navigation_bar" />
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:checked="true"
+                    android:theme="@style/MyCheckBox" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_version"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="关于"
-        android:layout_marginTop="80dp"
-        app:layout_constraintTop_toBottomOf="@+id/view_divider_navigation_bar"
-        android:textSize="15dp" />
+            </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="版本"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/item_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_version"
-        android:textSize="16dp" />
+            <View
+                android:id="@+id/view_divider_navigation_bar"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/list_divider"
+                app:layout_constraintTop_toBottomOf="@+id/ll_navigation_bar" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_version_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="当前版本"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/item_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_text"
-        android:textSize="15dp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_logout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/logout"
+                android:gravity="center"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:textSize="16dp"
+                android:visibility="invisible"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/view_divider_navigation_bar" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_url"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="官方网站"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/item_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_version_text"
-        android:textSize="16dp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="80dp"
+                android:text="关于"
+                android:textSize="15dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_logout" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_url_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="@string/wan_android"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/item_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_url"
-        android:textSize="15dp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="版本"
+                android:textColor="@color/item_title"
+                android:textSize="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_version" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_project"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="项目地址"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/item_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_url_text"
-        android:textSize="16dp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_version_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:text="当前版本"
+                android:textColor="@color/item_title"
+                android:textSize="15dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_text" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_project_url"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="@string/git_url_wan_android"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/item_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_project"
-        android:textSize="15dp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="官方网站"
+                android:textColor="@color/item_title"
+                android:textSize="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_version_text" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_url_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/wan_android"
+                android:textColor="@color/item_title"
+                android:textSize="15dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_url" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_project"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="项目地址"
+                android:textColor="@color/item_title"
+                android:textSize="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_url_text" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_project_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/git_url_wan_android"
+                android:textColor="@color/item_title"
+                android:textSize="15dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_project" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

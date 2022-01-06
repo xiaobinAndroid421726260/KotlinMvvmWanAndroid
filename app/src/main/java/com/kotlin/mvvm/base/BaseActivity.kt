@@ -18,8 +18,9 @@ import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ImmersionBar
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.common.UiState
-import com.kotlin.mvvm.popup.base.LoadingView
+import com.kotlin.mvvm.popup.LoadingView
 import com.jakewharton.rxbinding4.view.clicks
+import com.kotlin.mvvm.common.UiState.*
 import com.kotlin.mvvm.ext.*
 import com.permissionx.guolindev.PermissionX
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -71,10 +72,11 @@ abstract class BaseActivity : AppCompatActivity(), CustomAdapt {
                 uiState.collect {
                     e("-------lifecycleScope.UiState = $it")
                     when (it) {
-                        UiState.Loading -> showLoadView()
-                        UiState.LoadEnd -> dismissLoadView()
-                        UiState.LoadError -> dismissLoadView()
-                        UiState.LoadComplete -> dismissLoadView()
+                        Loading -> showLoadView()
+                        LoadEnd -> dismissLoadView()
+                        LoadError -> dismissLoadView()
+                        LoadComplete -> dismissLoadView()
+                        LoadDefault -> {}
                     }
                 }
             }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.color.ColorChooserDialog
@@ -17,6 +18,7 @@ import com.kotlin.mvvm.ext.*
 class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
 
     private val binding by lazy { ActivitySettingBinding.inflate(layoutInflater) }
+    private val mViewModel by viewModels<SettingViewModel>()
 
     override fun getContentView() = binding.root
 
@@ -24,7 +26,7 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
     override fun initView(bundle: Bundle?) {
         setSupportActionBar(binding.toolbar)
         setThemeColor()
-        binding.toolbar.title = StringUtils.getString(R.string.action_setting)
+        supportActionBar?.title = StringUtils.getString(R.string.action_setting)
         binding.toolbar.setNavigationIcon(
             if (getAppThemeColor() == Color.WHITE)
                 R.drawable.ic_arrow_black else R.drawable.ic_arrow_white
@@ -32,7 +34,8 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         binding.checkbox.isChecked = getNavBar()
         binding.tvVersion.setTextColor(mAppThemeColor)
-        binding.tvVersionText.text = StringUtils.getString(R.string.current_version) + "  " + AppUtils.getAppVersionName()
+        binding.tvVersionText.text =
+            StringUtils.getString(R.string.current_version) + "  " + AppUtils.getAppVersionName()
         binding.llTheme.onClick {
             ColorChooserDialog.Builder(this, R.string.choose_theme_color)
                 .backButton(R.string.back)
@@ -58,6 +61,12 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
             setNavBar(binding.checkbox.isChecked)
             setNavBarColor(true)
         }
+//        binding.tvLogout.onClick { mViewModel.logout() }
+//        mViewModel.handlerCode.observe(this) {
+//            saveUser("")
+//            binding.tvLogout.invisible()
+//            finish()
+//        }
     }
 
     override fun initData() {
@@ -84,6 +93,12 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
             }
         }
         binding.viewTheme.setImageDrawable(ColorDrawable(imageColor))
+//        if (StringUtils.isEmpty(getUser())){
+//            binding.tvLogout.invalidate()
+//        } else {
+//            binding.tvLogout.setBackgroundColor(imageColor)
+//            binding.tvLogout.visible()
+//        }
     }
 
     override fun onColorSelection(dialog: ColorChooserDialog, selectedColor: Int) {

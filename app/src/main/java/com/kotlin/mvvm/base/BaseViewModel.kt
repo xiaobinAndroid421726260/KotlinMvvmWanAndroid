@@ -1,6 +1,7 @@
 package com.kotlin.mvvm.base
 
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlin.mvvm.common.UiState
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
  */
 open class BaseViewModel : ViewModel(), LifecycleObserver {
 
-    val uiState = MutableStateFlow(UiState.Loading)
+    val uiState = MutableStateFlow(UiState.LoadDefault)
+    val handlerCode = MutableLiveData<Int>()
 
     /**
      * 运行在UI线程的协程 viewModelScope 已经实现了在onCleared取消协程

@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.ext.e
-import com.kotlin.mvvm.popup.base.LoadingView
+import com.kotlin.mvvm.popup.LoadingView
 import com.jakewharton.rxbinding4.view.clicks
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
@@ -43,7 +43,7 @@ abstract class BaseFragment : Fragment(), CustomAdapt, BaseView {
     private var mRootView: FrameLayout? = null
     private var mContentView: View? = null
     private var isFirstLoad = true
-    private var isAnsycView = false
+    private var isAsyncView = false
     protected var mContext: Context? = null
     protected var savedInstanceState: Bundle? = null
     private var mDisposable: CompositeDisposable? = null
@@ -168,7 +168,7 @@ abstract class BaseFragment : Fragment(), CustomAdapt, BaseView {
                 }
             }
         } else {
-            if (isAnsycView) {
+            if (isAsyncView) {
                 if (isNeedReload()) {
                     initData()
                 }
@@ -278,7 +278,7 @@ abstract class BaseFragment : Fragment(), CustomAdapt, BaseView {
         if (isAnsycLoadView()) {
             mRootView?.removeAllViews()
             mRootView?.addView(view)
-            isAnsycView = true
+            isAsyncView = true
         }
     }
 
