@@ -2,11 +2,22 @@ package com.kotlin.mvvm.api
 
 import com.kotlin.mvvm.common.BaseListResponse
 import com.kotlin.mvvm.common.BaseResponse
+import com.kotlin.mvvm.common.UserInfoBean
+import com.kotlin.mvvm.ui.collect.CollectBean
 import com.kotlin.mvvm.ui.home.bean.BannerBean
 import com.kotlin.mvvm.ui.home.bean.HomeBean
+import com.kotlin.mvvm.ui.integral.bean.IntegralBean
+import com.kotlin.mvvm.ui.integral.bean.RankBean
+import com.kotlin.mvvm.ui.integral.bean.UserIntegralBean
 import com.kotlin.mvvm.ui.login.bean.LoginBean
+import com.kotlin.mvvm.ui.message.MsgBean
+import com.kotlin.mvvm.ui.my.bean.WendBean
 import com.kotlin.mvvm.ui.project.bean.ProjectBean
 import com.kotlin.mvvm.ui.project.bean.ProjectPagerBean
+import com.kotlin.mvvm.ui.search.bean.SearchBean
+import com.kotlin.mvvm.ui.share.bean.HotKeyBean
+import com.kotlin.mvvm.ui.share.bean.Share
+import com.kotlin.mvvm.ui.share.bean.ShareBean
 import com.kotlin.mvvm.ui.square.SquareBean
 import com.kotlin.mvvm.ui.system.bean.KnowBean
 import com.kotlin.mvvm.ui.system.bean.NaviBean
@@ -49,6 +60,12 @@ interface Api {
      */
     @GET(HttpsApi.logout)
     suspend fun logout(): BaseResponse<String>
+
+    /**
+     * 个人信息
+     */
+    @POST(HttpsApi.user_info)
+    suspend fun userInfo(): BaseResponse<UserInfoBean>
 
     /**
      * 首页banner
@@ -127,4 +144,76 @@ interface Api {
         @Path("page") page: Int,
         @Query("cid") cid: Int?
     ): BaseResponse<BaseListResponse<MutableList<ProjectPagerBean>>>
+
+    /**
+     * 问答
+     */
+    @GET(HttpsApi.get_wenda_list_json + "{page}/json")
+    suspend fun getWendListJson(
+        @Path("page") page: Int,
+        @Query("page_size") page_size: Int
+    ): BaseResponse<BaseListResponse<MutableList<WendBean>>>
+
+    /**
+     * 获取个人积分获取列表，需要登录后访问
+     */
+    @GET(HttpsApi.get_my_integral_list + "{page}/json")
+    suspend fun getMyIntegralList(@Path("page") page: Int): BaseResponse<BaseListResponse<MutableList<IntegralBean>>>
+
+    /**
+     * 获取个人积分，需要登录后访问
+     */
+    @GET(HttpsApi.get_my_integral)
+    suspend fun getMyIntegral(): BaseResponse<UserIntegralBean>
+
+    /**
+     * 积分排行榜接口
+     */
+    @GET(HttpsApi.get_integral_rank + "{page}/json")
+    suspend fun getIntegralRank(@Path("page") page: Int): BaseResponse<BaseListResponse<MutableList<RankBean>>>
+
+    /**
+     * 获取收藏文章列表
+     */
+    @GET(HttpsApi.get_collect_list + "{page}/json")
+    suspend fun getCollectList(@Path("page") page: Int): BaseResponse<BaseListResponse<MutableList<CollectBean>>>
+
+    /**
+     * 获取自己的分享列表
+     */
+    @GET(HttpsApi.get_user_share_list + "{page}/json")
+    suspend fun getUserShareList(@Path("page") page: Int): BaseResponse<ShareBean<BaseListResponse<MutableList<Share>>>>
+
+    /**
+     * 获取未读消息数量
+     */
+    @GET(HttpsApi.get_message_count_unread)
+    suspend fun getMessageCountUnread(): BaseResponse<Int>
+
+    /**
+     * 已读消息列表
+     */
+    @GET(HttpsApi.get_message_read_list + "{page}/json")
+    suspend fun getMessageReadList(@Path("page") page: Int): BaseResponse<BaseListResponse<MutableList<MsgBean>>>
+
+    /**
+     * 未读消息列表
+     */
+    @GET(HttpsApi.get_message_unread_list + "{page}/json")
+    suspend fun getMessageUnreadList(@Path("page") page: Int): BaseResponse<BaseListResponse<MutableList<MsgBean>>>
+
+    /**
+     * 搜索
+     */
+    @POST(HttpsApi.article_query + "{page}/json")
+    suspend fun getArticleQuery(
+        @Path("page") page: Int,
+        @Query("k") k: String = ""
+    ): BaseResponse<BaseListResponse<MutableList<SearchBean>>>
+
+    /**
+     * 搜索热词
+     */
+    @GET(HttpsApi.search_hotkey_json)
+    suspend fun getSearchHotKeyJson(): BaseResponse<MutableList<HotKeyBean>>
 }

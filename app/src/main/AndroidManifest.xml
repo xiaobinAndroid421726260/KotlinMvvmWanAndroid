@@ -14,10 +14,43 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
         <activity
+            android:name=".ui.search.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.share.ShareListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.message.MessageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.square.SquareActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.collect.CollectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.integral.IntegralRankActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.integral.MyIntegralActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.questions.QuestionsAnswersActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.login.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".ui.login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.system.know.KnowledgeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.WebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.setting.SettingActivity"
             android:exported="false" />
         <activity
             android:name=".ui.LaunchActivity"
@@ -29,15 +62,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.system.know.KnowledgeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.WebViewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.setting.SettingActivity"
-            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="false"

@@ -22,7 +22,7 @@ class SquareAdapter : BaseQuickAdapter<SquareBean, BaseViewHolder>(R.layout.item
 
     @SuppressLint("CheckResult")
     override fun convert(holder: BaseViewHolder, item: SquareBean) {
-        holder.setGone(R.id.tv_refrsh, !item.fresh)
+        holder.setGone(R.id.tv_refresh, !item.fresh)
         holder.setGone(R.id.tv_article_tag, item.tags.isEmpty())
         holder.setText(
             R.id.tv_name,

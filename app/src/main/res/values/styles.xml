@@ -12,13 +12,12 @@
     </style>
 
     <style name="SplashScreenTheme.Base" parent="Theme.SplashScreen">
-        <item name="android:statusBarColor">@color/colorAccent</item>
-        <!--        <item name="android:navigationBarColor">@color/colorAccent</item>-->
-        <!--        <item name="android:windowLightNavigationBar">false</item>-->
-        <item name="android:windowLightStatusBar">false</item>
-        <!-- animation duration-->
-        <item name="windowSplashScreenAnimationDuration">1000</item>
-        <!-- screen background color -->
+        <item name="android:windowBackground">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/white</item>
+<!--        <item name="android:navigationBarColor">@color/colorAccent</item>-->
+<!--        <item name="android:windowLightNavigationBar">false</item>-->
+<!--        <item name="android:windowLightStatusBar">false</item>-->
+<!--        <item name="windowSplashScreenAnimationDuration">1000</item>-->
         <item name="windowSplashScreenBackground">@color/colorAccent</item>
         <item name="postSplashScreenTheme">@style/launchTheme</item>
     </style>

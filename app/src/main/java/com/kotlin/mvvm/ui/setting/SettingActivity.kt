@@ -27,11 +27,6 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
         setSupportActionBar(binding.toolbar)
         setThemeColor()
         supportActionBar?.title = StringUtils.getString(R.string.action_setting)
-        binding.toolbar.setNavigationIcon(
-            if (getAppThemeColor() == Color.WHITE)
-                R.drawable.ic_arrow_black else R.drawable.ic_arrow_white
-        )
-        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         binding.checkbox.isChecked = getNavBar()
         binding.tvVersion.setTextColor(mAppThemeColor)
         binding.tvVersionText.text =
@@ -61,24 +56,21 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
             setNavBar(binding.checkbox.isChecked)
             setNavBarColor(true)
         }
-//        binding.tvLogout.onClick { mViewModel.logout() }
-//        mViewModel.handlerCode.observe(this) {
-//            saveUser("")
-//            binding.tvLogout.invisible()
-//            finish()
-//        }
+        binding.tvLogout.onClick { mViewModel.logout() }
+        mViewModel.handlerCode.observe(this) {
+            saveUser("")
+            CookieClass.clearCookie()
+            binding.tvLogout.invisible()
+            finish()
+        }
     }
 
     override fun initData() {
         setToolbarBackColor(this, binding.toolbar, null)
-        binding.toolbar.setNavigationIcon(
-            if (getAppThemeColor() == Color.WHITE)
-                R.drawable.ic_arrow_black else R.drawable.ic_arrow_white
-        )
         binding.tvDarkMode.text = if (getNightMode()) {
-            "深夜模式"
+            StringUtils.getString(R.string.standard_mode)
         } else {
-            "标准模式"
+            StringUtils.getString(R.string.dark_mode)
         }
     }
 
@@ -93,12 +85,12 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
             }
         }
         binding.viewTheme.setImageDrawable(ColorDrawable(imageColor))
-//        if (StringUtils.isEmpty(getUser())){
-//            binding.tvLogout.invalidate()
-//        } else {
-//            binding.tvLogout.setBackgroundColor(imageColor)
-//            binding.tvLogout.visible()
-//        }
+        if (isLogin()){
+            binding.tvLogout.setBackgroundColor(imageColor)
+            binding.tvLogout.visible()
+        } else {
+            binding.tvLogout.invisible()
+        }
     }
 
     override fun onColorSelection(dialog: ColorChooserDialog, selectedColor: Int) {

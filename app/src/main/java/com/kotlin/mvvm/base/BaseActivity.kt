@@ -13,15 +13,25 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ImmersionBar
-import com.kotlin.mvvm.R
-import com.kotlin.mvvm.common.UiState
-import com.kotlin.mvvm.popup.LoadingView
 import com.jakewharton.rxbinding4.view.clicks
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
+import com.kotlin.mvvm.R
+import com.kotlin.mvvm.common.BaseView
+import com.kotlin.mvvm.common.UiState
 import com.kotlin.mvvm.common.UiState.*
-import com.kotlin.mvvm.ext.*
+import com.kotlin.mvvm.common.loadsir.EmptyCallback
+import com.kotlin.mvvm.common.loadsir.ErrorCallback
+import com.kotlin.mvvm.common.loadsir.LoadingCallback
+import com.kotlin.mvvm.ext.e
+import com.kotlin.mvvm.ext.getAppThemeColor
+import com.kotlin.mvvm.ext.getNightMode
+import com.kotlin.mvvm.popup.LoadingView
 import com.permissionx.guolindev.PermissionX
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,15 +47,16 @@ import java.util.concurrent.TimeUnit
  * @author Db_z
  * @Date 2021/10/7 15:38
  */
-abstract class BaseActivity : AppCompatActivity(), CustomAdapt {
+abstract class BaseActivity : AppCompatActivity(), CustomAdapt, BaseView {
 
     protected val mHandler = Handler(Looper.getMainLooper())
     protected var mAppThemeColor = getAppThemeColor()
     private var isFirstLoad = true
     private var mDisposable: CompositeDisposable? = null
     protected var savedInstanceState: Bundle? = null
+    private var mLoadService: LoadService<Any>? = null
 
-    protected abstract fun getContentView(): View
+    protected abstract fun getContentView(): View?
 
     protected abstract fun initView(bundle: Bundle?)
 
@@ -73,14 +84,32 @@ abstract class BaseActivity : AppCompatActivity(), CustomAdapt {
                     e("-------lifecycleScope.UiState = $it")
                     when (it) {
                         Loading -> showLoadView()
-                        LoadEnd -> dismissLoadView()
-                        LoadError -> dismissLoadView()
-                        LoadComplete -> dismissLoadView()
+                        LoadEnd -> {
+                            dismissLoadView()
+                            showContent()
+                        }
+                        LoadError -> {
+                            dismissLoadView()
+                            showEmpty()
+                        }
+                        LoadComplete -> {
+                            dismissLoadView()
+                            showContent()
+                        }
                         LoadDefault -> {}
                     }
                 }
             }
         }
+    }
+
+    /**
+     * 注册LoadSir
+     *
+     * @param view 替换视图
+     */
+    fun setLoadSir(view: View) {
+        mLoadService = LoadSir.getDefault().register(view) { onReloadClick() }
     }
 
     /**
@@ -221,6 +250,31 @@ abstract class BaseActivity : AppCompatActivity(), CustomAdapt {
 
     fun dismissDelayWith(delay: Long, runnable: Runnable?) {
         LoadingView.getInstance(this).delayDismissWith(delay, runnable)
+    }
+
+    override fun showContent() {
+        mLoadService?.let {
+            mHandler.post { it.showSuccess() }
+        }
+    }
+
+    override fun showLoading() {
+        mLoadService?.let {
+            mHandler.post { it.showCallback(LoadingCallback::class.java) }
+        }
+    }
+
+    override fun showEmpty() {
+        mLoadService?.let {
+            mHandler.post { it.showCallback(EmptyCallback::class.java) }
+        }
+    }
+
+    override fun showFailure(message: String?) {
+        mLoadService?.let {
+            mHandler.post { it.showCallback(ErrorCallback::class.java) }
+            ToastUtils.showShort(message)
+        }
     }
 
     override fun getResources(): Resources {

@@ -38,7 +38,7 @@
                     android:paddingEnd="4dp"
                     android:paddingBottom="2dp"
                     android:text="玩Android"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/accent_green"
                     android:textSize="11dp" />
 
                 <TextView

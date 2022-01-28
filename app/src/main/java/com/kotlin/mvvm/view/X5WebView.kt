@@ -17,7 +17,6 @@ import com.kotlin.mvvm.R
 import com.kotlin.mvvm.ext.gone
 import com.kotlin.mvvm.ext.visible
 import me.jessyan.autosize.AutoSize
-import java.lang.Exception
 
 /**
  * description:

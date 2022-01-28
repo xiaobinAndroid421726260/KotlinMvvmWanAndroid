@@ -3,9 +3,6 @@ package com.kotlin.mvvm.common
 import com.blankj.utilcode.util.GsonUtils
 import com.kotlin.mvvm.ext.e
 import java.io.Serializable
-import kotlin.jvm.JvmField
-import kotlin.jvm.JvmInline
-import kotlin.jvm.JvmName
 
 /*
  * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.

@@ -4,8 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.kotlin.mvvm.ui.project.bean.ProjectBean
-import com.kotlin.mvvm.ui.wechat.WechatViewPagerFragment
-import com.kotlin.mvvm.ui.wechat.bean.WechatBean
 
 /**
  * description:

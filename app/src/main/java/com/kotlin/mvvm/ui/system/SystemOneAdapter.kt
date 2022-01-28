@@ -1,5 +1,6 @@
 package com.kotlin.mvvm.ui.system
 
+import com.blankj.utilcode.util.GsonUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -26,6 +27,6 @@ class SystemOneAdapter : BaseQuickAdapter<SystemBean, BaseViewHolder>(R.layout.i
             }
             holder.setText(R.id.tv_title_second, stringBuilder)
         }
-        holder.itemView.onClick { KnowledgeActivity.newInstance(item.name, item.children) }
+        holder.itemView.onClick { KnowledgeActivity.newInstance(item.name, GsonUtils.toJson(item.children)) }
     }
 }

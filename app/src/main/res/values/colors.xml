@@ -7,6 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+
+    <color name="reverse_white">#ff2d2d2d</color>
+    <color name="white_title">#FFFFFFFF</color>
+
+    <color name="color_black">#ff2d2d2d</color>
 
 <!--    <color name="colorPrimary">@color/colorAccent</color>-->
     <color name="colorPrimary">@color/accent_pale_blue</color>
@@ -25,6 +32,7 @@
 
     <color name="textColorPrimary">#616161</color>
     <color name="viewBackground">@color/white</color>
+    <color name="my_viewBackground">@color/Grey200</color>
     <color name="windowBackground">@color/Grey100</color>
     <color name="line_divider">@color/Grey300</color>
     <color name="list_divider">@color/Grey400</color>

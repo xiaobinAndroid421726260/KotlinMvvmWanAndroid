@@ -2,10 +2,12 @@ package com.kotlin.mvvm.ui
 
 import android.graphics.Color
 import android.os.Bundle
-import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.databinding.ActivityWebViewBinding
-import com.kotlin.mvvm.ext.*
+import com.kotlin.mvvm.ext.getAppThemeColor
+import com.kotlin.mvvm.ext.getNightMode
+import com.kotlin.mvvm.ext.setToolbarBackColor
+import com.kotlin.mvvm.ext.visible
 
 class WebViewActivity : BaseActivity() {
 
@@ -25,11 +27,6 @@ class WebViewActivity : BaseActivity() {
         setSupportActionBar(binding.toolbar)
         binding.tvTitle.text = "正在加载中..."
         binding.tvTitle.visible()
-        binding.toolbar.setNavigationIcon(
-            if (getAppThemeColor() == Color.WHITE)
-                R.drawable.ic_arrow_black else R.drawable.ic_arrow_white
-        )
-        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         title?.let { binding.tvTitle.text = it }
         url?.let { binding.x5WebView.loadUrl(it) }
     }

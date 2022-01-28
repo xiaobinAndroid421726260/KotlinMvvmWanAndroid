@@ -20,7 +20,7 @@ class LaunchActivity : BaseActivity() {
 
     private val binding by lazy { ActivityLaunchBinding.inflate(layoutInflater) }
     private lateinit var splashScreen: SplashScreen
-    private val defaultExitDuration = 1500.toLong()
+    private val defaultExitDuration = 1000.toLong()
 
     override fun setWindowConfigure() {
         splashScreen = installSplashScreen()
@@ -31,7 +31,7 @@ class LaunchActivity : BaseActivity() {
     override fun initView(bundle: Bundle?) {
         initImmersionBar(ContextCompat.getColor(this, R.color.colorAccent))
         splashScreen.setOnExitAnimationListener { provider ->
-            showSplashIconExitAnimator(provider.iconView){
+            showSplashIconExitAnimator(provider.iconView) {
                 provider.remove()
             }
             // 两个动画的时长可以不一样，这里监听 splashScreen 动画结束
@@ -91,12 +91,12 @@ class LaunchActivity : BaseActivity() {
             View.SCALE_Y,
             Path().apply {
                 moveTo(1.0f, 1.0f)
-                lineTo(0f, 0f)
+                lineTo(0.3f, 0.3f)
             }
         )
         AnimatorSet().run {
-            duration = defaultExitDuration
             interpolator = AnticipateInterpolator()
+            duration = defaultExitDuration
             playTogether(scaleOut, alphaOut)
             doOnEnd {
                 onExit()

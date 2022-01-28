@@ -6,7 +6,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
 import com.kotlin.mvvm.databinding.FragmentKnowledgeBinding
-import com.kotlin.mvvm.ext.e
 import com.kotlin.mvvm.ext.setLinearLayoutManager
 
 /**

@@ -8,8 +8,8 @@
 minsdk = "24"
 targetsdk = "31"
 compilesdk = "31"
-versioncode = "1"
-versionname = "1.0.0"
+versioncode = "101"
+versionname = "1.0.1"
 
 # SDK
 gradle = "7.0.3"
@@ -43,8 +43,6 @@ lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", v
 
 # BaseRecyclerView
 baserecyclerview = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7"
-# 头条适配
-autosize = "me.jessyan:autosize:1.2.1"
 # 腾讯 mmkv
 mmkv = "com.tencent:mmkv:1.2.11"
 # 工具类
@@ -56,12 +54,12 @@ permissionx = "com.guolindev.permissionx:permissionx:1.6.0"
 # rxbinding3 = "com.jakewharton.rxbinding3:rxbinding:3.0.0"
 # 连点 防抖动
 rxbinding = "com.jakewharton.rxbinding4:rxbinding:4.0.0"
-# flycoTabLayout
-tabLayout = "io.github.h07000223:flycoTabLayout:3.0.0"
 # material-dialogs
 commons-dialogs = "com.afollestad.material-dialogs:commons:0.9.6.0"
 # splashscreen
 splashscreen = "androidx.core:core-splashscreen:1.0.0-alpha02"
+# PersistentCookieJar
+persistent-cookie-jar = "com.github.franmontiel:PersistentCookieJar:v1.0.1"
 
 # okhttp 日志拦截器
 logging-interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.2"

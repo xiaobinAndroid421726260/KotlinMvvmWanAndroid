@@ -7,9 +7,9 @@ import android.os.Parcelable
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
+import android.view.View.OnClickListener
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.ext.dp2px
-import kotlin.collections.HashSet
 
 /**
  * description:

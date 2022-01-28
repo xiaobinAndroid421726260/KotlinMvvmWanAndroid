@@ -5,6 +5,7 @@
     <color name="colorAccent">#35464e</color>
     <color name="textColorPrimary">#616161</color>
     <color name="viewBackground">@color/Grey800</color>
+    <color name="my_viewBackground">@color/Grey800</color>
     <color name="windowBackground">@color/Grey900</color>
 
     <color name="line_divider">@color/Grey700</color>
@@ -27,15 +28,23 @@
     <color name="sticky_header_bg">#515151</color>
 
     <color name="color_theme_text">#CCFFFFFF</color>//黑暗主题白色文字
-    <color name="accent_red">@color/colorAccent</color>
+<!--    <color name="accent_red">@color/colorAccent</color>-->
     <color name="accent_pink">@color/colorAccent</color>
     <color name="accent_orange">@color/colorAccent</color>
-    <color name="accent_pale_blue">@color/colorAccent</color>
-    <color name="accent_green">@color/colorAccent</color>
+<!--    <color name="accent_pale_blue">@color/colorAccent</color>-->
+<!--    <color name="accent_green">@color/colorAccent</color>-->
     <color name="accent_cyan">@color/colorAccent</color>
-    <color name="accent_indigo">@color/colorAccent</color>
+<!--    <color name="accent_indigo">@color/colorAccent</color>-->
     <color name="accent_purple">@color/colorAccent</color>
     <color name="accent_brown">@color/colorAccent</color>
+
+    <color name="accent_red">#FFDB4437</color>//红色
+    <color name="accent_green">#FF0F9D58</color>//绿
+    <color name="accent_pale_blue">#FF2196F3</color>//蓝
+    <color name="accent_indigo">#FF3F51B5</color>//靛蓝
+
     <color name="white">#ff2d2d2d</color>
+    <color name="white_title">#FFFFFFFF</color>
+    <color name="reverse_white">#FFFFFFFF</color>
 
 </resources>

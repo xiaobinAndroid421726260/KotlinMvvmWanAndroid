@@ -2,12 +2,11 @@ package com.kotlin.mvvm.ui.wechat
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
 import com.kotlin.mvvm.databinding.FragmentWechatViewpagerBinding
-import com.kotlin.mvvm.ext.*
+import com.kotlin.mvvm.ext.setLinearLayoutManager
 
 /**
  * description:

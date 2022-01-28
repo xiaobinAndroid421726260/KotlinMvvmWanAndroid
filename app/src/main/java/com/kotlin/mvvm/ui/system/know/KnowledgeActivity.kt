@@ -1,34 +1,31 @@
 package com.kotlin.mvvm.ui.system.know
 
-import android.graphics.Color
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.blankj.utilcode.util.ActivityUtils
+import com.blankj.utilcode.util.GsonUtils
 import com.google.android.material.tabs.TabLayoutMediator
-import com.kotlin.mvvm.R
+import com.google.gson.reflect.TypeToken
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.common.ScrollToTop
 import com.kotlin.mvvm.databinding.ActivityKnowledgeBinding
-import com.kotlin.mvvm.ext.getAppThemeColor
 import com.kotlin.mvvm.ext.setTaLayoutViewTextColor
 import com.kotlin.mvvm.ext.setToolbarBackColor
 import com.kotlin.mvvm.ui.system.bean.Children
-import java.io.Serializable
 
 class KnowledgeActivity : BaseActivity() {
 
     private val binding by lazy { ActivityKnowledgeBinding.inflate(layoutInflater) }
     private var mAdapter: FragmentStateAdapter? = null
-    private var datas = mutableListOf<Children>()
+    private var dataJson: String? = null
     private var name: String? = null
 
     companion object {
-        fun newInstance(name: String, data: MutableList<Children>) {
+        fun newInstance(name: String, data: String) {
             val bundle = Bundle().apply {
                 putString("name", name)
-                putSerializable("data", data as Serializable)
+                putString("data", data)
             }
             ActivityUtils.startActivity(bundle, KnowledgeActivity::class.java)
         }
@@ -39,25 +36,14 @@ class KnowledgeActivity : BaseActivity() {
     override fun initView(bundle: Bundle?) {
         bundle?.apply {
             name = getString("name")
-            datas = getSerializable("data") as MutableList<Children>
+            dataJson = getString("data")
         }
+        val dataList = GsonUtils.fromJson<MutableList<Children>>(dataJson, object : TypeToken<MutableList<Children>>(){}.type)
         setSupportActionBar(binding.toolbar)
-        binding.toolbar.title = name
-        binding.toolbar.setTitleTextColor(
-            if (getAppThemeColor() == Color.WHITE) ContextCompat.getColor(
-                this,
-                R.color.black
-            ) else ContextCompat.getColor(this, R.color.white)
-        )
-        binding.toolbar.setNavigationIcon(
-            if (getAppThemeColor() == Color.WHITE)
-                R.drawable.ic_arrow_black else R.drawable.ic_arrow_white
-        )
-        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
-
+        supportActionBar?.title = name
         val mFragment = arrayListOf<Fragment>()
         val mTitles = arrayListOf<String>()
-        for (data in datas) {
+        for (data in dataList) {
             mTitles.add(data.name)
             mFragment.add(KnowledgeFragment.newInstance(data.id))
         }

@@ -1,11 +1,11 @@
 package com.kotlin.mvvm.network
 
 import androidx.viewbinding.BuildConfig
-import com.kotlin.mvvm.api.ANDROID_URL
-import com.kotlin.mvvm.api.getHost
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
+import com.kotlin.mvvm.api.ANDROID_URL
+import com.kotlin.mvvm.api.getHost
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

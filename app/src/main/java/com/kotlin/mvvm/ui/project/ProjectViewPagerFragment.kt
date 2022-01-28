@@ -1,15 +1,11 @@
 package com.kotlin.mvvm.ui.project
 
 import android.os.Bundle
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
 import com.kotlin.mvvm.databinding.FragmentPagerProjectBinding
-import com.kotlin.mvvm.ext.e
 import com.kotlin.mvvm.ext.setLinearLayoutManager
 
 /**

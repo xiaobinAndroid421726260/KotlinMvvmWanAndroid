@@ -16,7 +16,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-        ndk.abiFilters 'armeabi-v7a'
+        ndk.abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a'
     }
 
     productFlavors {
@@ -73,8 +73,8 @@ dependencies {
     implementation libs.permissionx
     implementation libs.rxandroid
     implementation libs.rxbinding
-    implementation libs.tabLayout
     implementation libs.splashscreen
+    implementation libs.persistent.cookie.jar
 
     // 头条适配
     implementation project(path: ':LocalPackage:AutoSize_aar')

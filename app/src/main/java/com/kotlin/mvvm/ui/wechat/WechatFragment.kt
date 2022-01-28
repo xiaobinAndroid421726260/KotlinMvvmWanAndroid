@@ -7,8 +7,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
-import com.kotlin.mvvm.ext.setTaLayoutViewTextColor
 import com.kotlin.mvvm.databinding.FragmentWechatBinding
+import com.kotlin.mvvm.ext.setTaLayoutViewTextColor
 import com.kotlin.mvvm.ui.wechat.bean.WechatBean
 
 /**

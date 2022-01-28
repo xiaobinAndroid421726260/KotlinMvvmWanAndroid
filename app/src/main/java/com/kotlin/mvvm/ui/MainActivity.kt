@@ -1,44 +1,46 @@
 package com.kotlin.mvvm.ui
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
+import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.StringUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.common.ScrollToTop
 import com.kotlin.mvvm.databinding.ActivityMainBinding
 import com.kotlin.mvvm.ext.*
 import com.kotlin.mvvm.ui.home.HomeFragment
+import com.kotlin.mvvm.ui.my.MyFragment
 import com.kotlin.mvvm.ui.project.ProjectFragment
+import com.kotlin.mvvm.ui.search.SearchActivity
 import com.kotlin.mvvm.ui.setting.SettingActivity
-import com.kotlin.mvvm.ui.square.SquareFragment
 import com.kotlin.mvvm.ui.system.SystemFragment
 import com.kotlin.mvvm.ui.wechat.WechatFragment
-import java.lang.Exception
 
 class MainActivity : BaseActivity() {
 
     companion object {
         private const val BOTTOM_INDEX = "bottom_index"
-
         private const val FRAGMENT_HOME = 0
-        private const val FRAGMENT_SQUARE = 1
-        private const val FRAGMENT_WECHAT = 2
-        private const val FRAGMENT_SYSTEM = 3
-        private const val FRAGMENT_PROJECT = 4
+        private const val FRAGMENT_WECHAT = 1
+        private const val FRAGMENT_SYSTEM = 2
+        private const val FRAGMENT_PROJECT = 3
+        private const val FRAGMENT_MY = 4
     }
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mFragments = mutableListOf<Fragment>().apply {
         add(HomeFragment())
-        add(SquareFragment())
         add(WechatFragment())
         add(SystemFragment())
         add(ProjectFragment())
+        add(MyFragment())
     }
     private var index = FRAGMENT_HOME
 
@@ -60,10 +62,10 @@ class MainActivity : BaseActivity() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_home -> showFragment(FRAGMENT_HOME)
-                R.id.action_square -> showFragment(FRAGMENT_SQUARE)
                 R.id.action_wechat -> showFragment(FRAGMENT_WECHAT)
                 R.id.action_system -> showFragment(FRAGMENT_SYSTEM)
                 R.id.action_project -> showFragment(FRAGMENT_PROJECT)
+                R.id.action_my -> showFragment(FRAGMENT_MY)
             }
             return@setOnItemSelectedListener true
         }
@@ -76,7 +78,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
-        setToolbarBackColor(this, binding.toolbar, binding.actionButton)
+        setToolbarBackColor(this, binding.toolbar, binding.actionButton, false)
         setBottomNavigationItemColor()
         // 重新可见时判断BottomNavigation颜色是否根据主题变化，然后重新创建
         if (getNavBar() && getNavBarColor()) {
@@ -85,7 +87,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun setBottomNavigationItemColor(){
+    private fun setBottomNavigationItemColor() {
         setBottomNavigationItemColor(this, binding.bottomNavigation)
     }
 
@@ -94,10 +96,10 @@ class MainActivity : BaseActivity() {
         showHideFragment(mFragments[index])
         when (index) {
             FRAGMENT_HOME -> supportActionBar?.title = StringUtils.getString(R.string.home)
-            FRAGMENT_SQUARE -> supportActionBar?.title = StringUtils.getString(R.string.square)
             FRAGMENT_WECHAT -> supportActionBar?.title = StringUtils.getString(R.string.wechat)
             FRAGMENT_SYSTEM -> supportActionBar?.title = StringUtils.getString(R.string.system)
             FRAGMENT_PROJECT -> supportActionBar?.title = StringUtils.getString(R.string.project)
+            FRAGMENT_MY -> supportActionBar?.title = StringUtils.getString(R.string.my)
         }
     }
 
@@ -125,17 +127,25 @@ class MainActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
+        if (!getNightMode()){
+            // 如果是白色主题  那么右侧的图标就会变成黑色
+            if (getAppThemeColor() == Color.WHITE) {
+                val search = menu?.findItem(R.id.action_search)
+                val setting = menu?.findItem(R.id.action_setting)
+                val colorStateList =
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_black))
+                MenuItemCompat.setIconTintList(search, colorStateList)
+                MenuItemCompat.setIconTintList(setting, colorStateList)
+            }
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
-            ToastUtils.showShort("跳转搜索")
-//            startLoginActivity()
-            return true
+            ActivityUtils.startActivity(SearchActivity::class.java)
         } else if (item.itemId == R.id.action_setting) {
             ActivityUtils.startActivity(SettingActivity::class.java)
-            return true
         }
         return super.onOptionsItemSelected(item)
     }

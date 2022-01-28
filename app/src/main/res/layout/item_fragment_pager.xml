@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="@color/viewBackground"
     app:cardCornerRadius="1dp"
     app:cardElevation="1dp">
@@ -37,7 +38,7 @@
                     android:paddingEnd="4dp"
                     android:paddingBottom="2dp"
                     android:text="公众号"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/accent_green"
                     android:textSize="11dp" />
 
                 <TextView

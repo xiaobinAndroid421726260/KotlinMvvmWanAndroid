@@ -5,7 +5,6 @@ import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
 import com.kotlin.mvvm.common.BaseListResponse
 import com.kotlin.mvvm.common.BaseResult
-import com.kotlin.mvvm.common.UiState
 import com.kotlin.mvvm.common.fold
 import com.kotlin.mvvm.network.RetrofitFactory
 import kotlinx.coroutines.Dispatchers

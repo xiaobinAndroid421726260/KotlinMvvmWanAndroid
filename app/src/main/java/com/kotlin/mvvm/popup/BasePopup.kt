@@ -1,7 +1,6 @@
 package com.kotlin.mvvm.popup
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.view.animation.AnimationUtils

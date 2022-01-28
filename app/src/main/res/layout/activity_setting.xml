@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_weight="1"
-                    android:text="深色模式"
+                    android:text="@string/dark_mode"
                     android:textColor="@color/item_title"
                     android:textSize="16dp" />
 
@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:text="标准模式"
+                    android:text="@string/standard_mode"
                     android:textColor="@color/item_title"
                     android:textSize="15dp" />
 

@@ -3,7 +3,9 @@ package com.kotlin.mvvm.ui.wechat
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
-import com.kotlin.mvvm.common.*
+import com.kotlin.mvvm.common.BaseListResponse
+import com.kotlin.mvvm.common.BaseResult
+import com.kotlin.mvvm.common.fold
 import com.kotlin.mvvm.network.RetrofitFactory
 import com.kotlin.mvvm.ui.wechat.bean.WechatBean
 import com.kotlin.mvvm.ui.wechat.bean.WechatPagerBean

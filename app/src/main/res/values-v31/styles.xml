@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SplashScreenTheme" parent="SplashScreenTheme.Base">
+        <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="SplashScreenTheme.Base" parent="Theme.SplashScreen">
+<!--        <item name="android:statusBarColor">@color/colorAccent</item>-->
+<!--        <item name="android:windowLightStatusBar">false</item>-->
+<!--        &lt;!&ndash; animation duration&ndash;&gt;-->
+<!--        <item name="windowSplashScreenAnimationDuration">1000</item>-->
+<!--        &lt;!&ndash; screen Icon background color &ndash;&gt;-->
+<!--        <item name="android:windowSplashScreenIconBackgroundColor">@color/white</item>-->
+        <!-- screen Icon background color -->
+        <item name="android:windowSplashScreenBackground">@color/colorAccent</item>
+        <item name="postSplashScreenTheme">@style/launchTheme</item>
+    </style>
+
+</resources>

@@ -1,6 +1,5 @@
 package com.kotlin.mvvm.ui.login
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.blankj.utilcode.util.ActivityUtils
@@ -10,7 +9,6 @@ import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.databinding.ActivityLoginBinding
-import com.kotlin.mvvm.ext.getAppThemeColor
 import com.kotlin.mvvm.ext.onClick
 import com.kotlin.mvvm.ext.saveUser
 import com.kotlin.mvvm.ext.setToolbarBackColor
@@ -26,10 +24,6 @@ class LoginActivity : BaseActivity() {
         refreshUiState(mViewModel.uiState)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = StringUtils.getString(R.string.login)
-        binding.toolbar.setNavigationIcon(
-            if (getAppThemeColor() == Color.WHITE)
-                R.drawable.ic_arrow_black else R.drawable.ic_arrow_white
-        )
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         mViewModel.mLoginRegisterBean.observe(this) {
             saveUser(GsonUtils.toJson(it))

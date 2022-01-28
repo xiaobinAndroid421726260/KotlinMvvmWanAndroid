@@ -2,7 +2,8 @@ package com.kotlin.mvvm.network
 
 import com.kotlin.mvvm.api.ANDROID_URL
 import com.kotlin.mvvm.api.Api
-import okhttp3.*
+import com.kotlin.mvvm.ext.CookieClass.cookieJar
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
 /**
@@ -28,7 +29,7 @@ class RetrofitFactory private constructor(hostType: Int = ANDROID_URL) : BaseRet
     }
 
     override fun handleBuilder(builder: OkHttpClient.Builder) {
-
+        builder.cookieJar(cookieJar)
     }
 
     override fun retrofitBuilder(builder: Retrofit.Builder) {

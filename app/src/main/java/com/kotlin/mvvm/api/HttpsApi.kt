@@ -23,8 +23,11 @@ object HttpsApi {
     // 退出登录
     const val logout: String = "/user/logout/json"
 
+    // 个人信息
+    const val user_info: String = "/user/lg/userinfo/json"
+
     // 首页文章列表 banner
-    const val banner: String =  "/banner/json"
+    const val banner: String = "/banner/json"
 
     // 置顶文章
     const val article_top: String = "/article/top/json"
@@ -55,5 +58,41 @@ object HttpsApi {
 
     // 项目列表数据
     const val get_project_cid_json: String = "/project/list/"
+
+    // 问答
+    const val get_wenda_list_json: String = "/wenda/list/"
+
+    // 获取个人积分获取列表，需要登录后访问
+    const val get_my_integral_list: String = "lg/coin/list/"
+
+    // 获取个人积分，需要登录后访问
+    const val get_my_integral: String = "lg/coin/userinfo/json"
+
+    // 积分排行榜接口
+    const val get_integral_rank: String = "coin/rank/"
+
+    // 获取收藏文章列表
+    const val get_collect_list: String = "lg/collect/list/"
+
+    // 未读消息数量
+    const val get_message_count_unread: String = "message/lg/count_unread/json"
+
+    // 已读消息列表
+    const val get_message_read_list: String = "message/lg/readed_list/"
+
+    // 未读消息列表
+    const val get_message_unread_list: String = "message/lg/unread_list/"
+
+    // 获取自己的分享列表
+    const val get_user_share_list: String = "user/lg/private_articles/"
+
+    // 搜索
+    const val article_query: String = "article/query/"
+
+    // 搜索热词
+    const val search_hotkey_json: String = "hotkey/json"
+
+    // 添加分享
+    const val add_share: String = "lg/user_article/add/json"
 
 }

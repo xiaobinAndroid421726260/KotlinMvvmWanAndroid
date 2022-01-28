@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -28,7 +27,9 @@ import com.kotlin.mvvm.R
 fun setToolbarBackColor(
     activity: AppCompatActivity,
     toolbar: Toolbar,
-    actionButton: FloatingActionButton?
+    actionButton: FloatingActionButton?,
+    isBackPressed: Boolean = true,
+    navigationListener: (() -> Unit)? = null
 ) {
     val color = if (getNightMode()) {
         ContextCompat.getColor(activity, R.color.colorPrimary)
@@ -36,17 +37,21 @@ fun setToolbarBackColor(
         getAppThemeColor()
     }
     if (getNightMode()) {
-        setToolbarWhiteExceptColor(activity, toolbar, color)
+        setToolbarWhiteExceptColor(activity, toolbar, color, isBackPressed, navigationListener)
     } else {
         if (activity.supportActionBar != null) {
             if (color == Color.WHITE) {
-                setToolbarWhiteColor(activity, toolbar, color)
+                setToolbarWhiteColor(activity, toolbar, color, isBackPressed, navigationListener)
             } else {
-                setToolbarWhiteExceptColor(activity, toolbar, color)
+                setToolbarWhiteExceptColor(
+                    activity,
+                    toolbar,
+                    color,
+                    isBackPressed,
+                    navigationListener
+                )
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                activity.supportActionBar!!.setBackgroundDrawable(ColorDrawable(color))
-            }
+            activity.supportActionBar!!.setBackgroundDrawable(ColorDrawable(color))
         }
     }
     if (actionButton != null) {
@@ -154,8 +159,14 @@ fun setBottomNavigationItemColor(
 /**
  * 设置白色主题
  */
-private fun setToolbarWhiteColor(activity: AppCompatActivity, toolbar: Toolbar, color: Int) {
-    toolbar.setTitleTextColor(Color.BLACK)
+private fun setToolbarWhiteColor(
+    activity: AppCompatActivity,
+    toolbar: Toolbar,
+    color: Int,
+    isBackPressed: Boolean,
+    navigationListener: (() -> Unit)? = null
+) {
+    toolbarClickListener(false, activity, toolbar, isBackPressed, navigationListener)
     ImmersionBar.with(activity)
         .statusBarDarkFont(true)
         .fitsSystemWindows(true) //使用该属性,必须指定状态栏颜色
@@ -167,11 +178,44 @@ private fun setToolbarWhiteColor(activity: AppCompatActivity, toolbar: Toolbar, 
  * 设置除白色以外的主题
  */
 @SuppressLint("ResourceType")
-private fun setToolbarWhiteExceptColor(activity: AppCompatActivity, toolbar: Toolbar, color: Int) {
-    toolbar.setTitleTextColor(Color.WHITE)
+private fun setToolbarWhiteExceptColor(
+    activity: AppCompatActivity,
+    toolbar: Toolbar,
+    color: Int,
+    isBackPressed: Boolean,
+    navigationListener: (() -> Unit)? = null
+) {
+    toolbarClickListener(true, activity, toolbar, isBackPressed, navigationListener)
     ImmersionBar.with(activity)
         .statusBarDarkFont(false)
         .fitsSystemWindows(true) //使用该属性,必须指定状态栏颜色
         .statusBarColorInt(color)
         .init()
+}
+
+/**
+ * 设置toolbar
+ */
+private fun toolbarClickListener(
+    whiteExcept: Boolean,
+    activity: AppCompatActivity,
+    toolbar: Toolbar,
+    isBackPressed: Boolean,
+    navigationListener: (() -> Unit)? = null
+) {
+    if (isBackPressed) {
+        toolbar.setNavigationIcon(
+            when {
+                getNightMode() -> R.drawable.ic_arrow_white
+                getAppThemeColor() == Color.WHITE -> R.drawable.ic_arrow_black
+                else -> R.drawable.ic_arrow_white
+            }
+        )
+        if (navigationListener != null) {
+            navigationListener.invoke()
+        } else {
+            toolbar.setNavigationOnClickListener { activity.onBackPressed() }
+        }
+    }
+    toolbar.setTitleTextColor(if (whiteExcept) Color.WHITE else Color.BLACK)
 }
