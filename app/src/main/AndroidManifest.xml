@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.kotlin.mvvm">
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 检查网络可用性 -->
@@ -12,7 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/BaseAppTheme">
+        android:theme="@style/BaseAppTheme"
+        tools:ignore="AllowBackup">
         <activity
             android:name=".ui.search.SearchActivity"
             android:exported="false" />
@@ -53,7 +55,7 @@
             android:name=".ui.setting.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.LaunchActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>

@@ -2,9 +2,14 @@ package com.kotlin.mvvm.ui.wechat
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
+import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
+import com.kotlin.mvvm.common.handler_code_collect
+import com.kotlin.mvvm.common.handler_code_un_collect
 import com.kotlin.mvvm.databinding.FragmentWechatViewpagerBinding
 import com.kotlin.mvvm.ext.setLinearLayoutManager
 
@@ -21,6 +26,7 @@ class WechatViewPagerFragment : BaseFragment(), ScrollToTop {
     private val mAdapter by lazy { WechatAdapter() }
     private var id: Int? = 0
     private var page = 1
+    private var position = 0
 
     companion object {
         fun newInstance(id: Int): WechatViewPagerFragment {
@@ -50,6 +56,14 @@ class WechatViewPagerFragment : BaseFragment(), ScrollToTop {
             page++
             mViewModel.getUserWechatArticleJson(id, page)
         }
+        mAdapter.setCollectionListener { collect, id, position ->
+            this.position = position
+            if (collect) {
+                mViewModel.unCollectList(id)
+            } else {
+                mViewModel.collect(id)
+            }
+        }
         mViewModel.mWechatPagerBean.observe(this) {
             if (it.curPage == 1) {
                 if (it.datas.isEmpty()){
@@ -67,6 +81,19 @@ class WechatViewPagerFragment : BaseFragment(), ScrollToTop {
             if (it.curPage == it.pageCount) {
                 mAdapter.loadMoreModule.loadMoreEnd()
             }
+        }
+        mViewModel.handlerCode.observe(this) {
+            when (it) {
+                handler_code_collect -> {
+                    mAdapter.data[position].collect = true
+                    ToastUtils.showShort(StringUtils.getString(R.string.collect_success))
+                }
+                handler_code_un_collect -> {
+                    mAdapter.data[position].collect = false
+                    ToastUtils.showShort(StringUtils.getString(R.string.cancel_collect))
+                }
+            }
+            mAdapter.notifyItemChanged(position)
         }
     }
 

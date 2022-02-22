@@ -14,11 +14,12 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.blankj.utilcode.util.ActivityUtils
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
-import com.kotlin.mvvm.databinding.ActivityLaunchBinding
+import com.kotlin.mvvm.databinding.ActivitySplashBinding
 
-class LaunchActivity : BaseActivity() {
+@SuppressLint("CustomSplashScreen")
+class SplashActivity : BaseActivity() {
 
-    private val binding by lazy { ActivityLaunchBinding.inflate(layoutInflater) }
+    private val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
     private lateinit var splashScreen: SplashScreen
     private val defaultExitDuration = 1000.toLong()
 

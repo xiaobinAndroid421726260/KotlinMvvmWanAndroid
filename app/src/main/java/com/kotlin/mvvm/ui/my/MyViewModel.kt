@@ -3,10 +3,7 @@ package com.kotlin.mvvm.ui.my
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
-import com.kotlin.mvvm.common.BaseListResponse
-import com.kotlin.mvvm.common.BaseResult
-import com.kotlin.mvvm.common.UserInfoBean
-import com.kotlin.mvvm.common.fold
+import com.kotlin.mvvm.common.*
 import com.kotlin.mvvm.network.RetrofitFactory
 import com.kotlin.mvvm.ui.my.bean.WendBean
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +18,6 @@ import kotlinx.coroutines.withContext
 class MyViewModel : BaseViewModel() {
 
     val mWendBean = MutableLiveData<BaseListResponse<MutableList<WendBean>>>()
-    val mUserInfoBean = MutableLiveData<UserInfoBean>()
 
     fun getWendListJson(page: Int, page_size: Int = 20) = launchUI {
         val baseResponse = withContext(Dispatchers.IO){
@@ -55,17 +51,33 @@ class MyViewModel : BaseViewModel() {
         })
     }
 
-    fun userInfo() = launchUI {
-        val baseResponse = withContext(Dispatchers.IO){
-            val result = RetrofitFactory.instance.service.userInfo()
-            if (result.errorCode == 0){
-                BaseResult.success(result.data)
+    fun collect(id: Int) = launchUI {
+        val baseResponse = withContext(Dispatchers.IO) {
+            val result = RetrofitFactory.instance.service.collectList(id)
+            if (result.errorCode == 0) {
+                BaseResult.success(result.errorCode)
             } else {
-                BaseResult.failure(Throwable("Failed to userInfo${result.errorMsg}"))
+                BaseResult.failure(Throwable("Failed to collect${result.errorMsg}"))
             }
         }
         baseResponse.fold({
-            mUserInfoBean.value = it
+            handlerCode.value = handler_code_collect
+        }, {
+            ToastUtils.showShort(it.message)
+        })
+    }
+
+    fun unCollectList(id: Int) = launchUI {
+        val baseResponse = withContext(Dispatchers.IO) {
+            val result = RetrofitFactory.instance.service.unCollectList(id)
+            if (result.errorCode == 0) {
+                BaseResult.success(result.errorCode)
+            } else {
+                BaseResult.failure(Throwable("Failed to unCollect${result.errorMsg}"))
+            }
+        }
+        baseResponse.fold({
+            handlerCode.value = handler_code_un_collect
         }, {
             ToastUtils.showShort(it.message)
         })

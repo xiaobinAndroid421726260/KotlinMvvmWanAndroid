@@ -4,7 +4,7 @@
     android:id="@+id/layout_splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LaunchActivity">
+    tools:context=".ui.SplashActivity">
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,9 +2,14 @@ package com.kotlin.mvvm.ui.square
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
+import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
+import com.kotlin.mvvm.common.handler_code_collect
+import com.kotlin.mvvm.common.handler_code_un_collect
 import com.kotlin.mvvm.databinding.FragmentSquareBinding
 import com.kotlin.mvvm.ext.setLinearLayoutManager
 
@@ -20,6 +25,7 @@ class SquareFragment : BaseFragment(), ScrollToTop {
     private val mViewModel by viewModels<SquareViewModel>()
     private val mAdapter by lazy { SquareAdapter() }
     private var page = 0
+    private var position = 0
 
     override fun getContentView() = binding.root
 
@@ -36,6 +42,14 @@ class SquareFragment : BaseFragment(), ScrollToTop {
         mAdapter.loadMoreModule.setOnLoadMoreListener {
             page++
             mViewModel.getUserArticleJson(page)
+        }
+        mAdapter.setCollectionListener { collect, id, position ->
+            this.position = position
+            if (collect) {
+                mViewModel.unCollectList(id)
+            } else {
+                mViewModel.collect(id)
+            }
         }
         mViewModel.mDataBeans.observe(this){
             if (it.curPage == 1){
@@ -54,6 +68,19 @@ class SquareFragment : BaseFragment(), ScrollToTop {
             if (it.curPage == it.pageCount) {
                 mAdapter.loadMoreModule.loadMoreEnd()
             }
+        }
+        mViewModel.handlerCode.observe(this) {
+            when (it) {
+                handler_code_collect -> {
+                    mAdapter.data[position].collect = true
+                    ToastUtils.showShort(StringUtils.getString(R.string.collect_success))
+                }
+                handler_code_un_collect -> {
+                    mAdapter.data[position].collect = false
+                    ToastUtils.showShort(StringUtils.getString(R.string.cancel_collect))
+                }
+            }
+            mAdapter.notifyItemChanged(position)
         }
     }
 

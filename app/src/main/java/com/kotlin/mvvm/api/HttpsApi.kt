@@ -74,6 +74,15 @@ object HttpsApi {
     // 获取收藏文章列表
     const val get_collect_list: String = "lg/collect/list/"
 
+    // 收藏站内文章
+    const val collect_list: String = "lg/collect/"
+
+    // 取消收藏
+    const val unCollect: String = "lg/uncollect/"
+
+    // 取消收藏
+    const val unCollect_list: String = "lg/uncollect_originId/"
+
     // 未读消息数量
     const val get_message_count_unread: String = "message/lg/count_unread/json"
 

@@ -1,6 +1,7 @@
 package com.kotlin.mvvm.ui.project
 
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -20,6 +21,8 @@ import com.kotlin.mvvm.ui.project.bean.ProjectPagerBean
  */
 class ProjectAdapter : BaseQuickAdapter<ProjectPagerBean, BaseViewHolder>(R.layout.item_project), LoadMoreModule {
 
+    private lateinit var listener: (collect: Boolean, id: Int, position: Int) -> Unit
+
     override fun convert(holder: BaseViewHolder, item: ProjectPagerBean) {
         val imageView = holder.getView<ImageView>(R.id.image)
         if (item.envelopePic.isNotEmpty()) {
@@ -37,5 +40,12 @@ class ProjectAdapter : BaseQuickAdapter<ProjectPagerBean, BaseViewHolder>(R.layo
             if (item.collect) R.drawable.ic_like else R.drawable.ic_like_not
         )
         holder.itemView.onClick { startWebViewActivity(item.id, item.link, item.title) }
+        holder.getView<AppCompatImageView>(R.id.iv_collection).onClick {
+            listener.invoke(item.collect, item.id, getItemPosition(item))
+        }
+    }
+
+    fun setCollectionListener(listener: (collect: Boolean, id: Int, position: Int) -> Unit) {
+        this.listener = listener
     }
 }

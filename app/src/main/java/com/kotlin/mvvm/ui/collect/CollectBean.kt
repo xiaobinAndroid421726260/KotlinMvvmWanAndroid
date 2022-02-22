@@ -10,7 +10,7 @@ data class CollectBean(
     val author: String,
     val chapterId: Int,
     val chapterName: String,
-    val collect: Boolean = true,
+    var collect: Boolean = true,
     val courseId: Int,
     val desc: String,
     val envelopePic: String,

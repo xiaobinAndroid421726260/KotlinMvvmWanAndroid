@@ -8,8 +8,8 @@
 minsdk = "24"
 targetsdk = "31"
 compilesdk = "31"
-versioncode = "101"
-versionname = "1.0.1"
+versioncode = "102"
+versionname = "1.0.2"
 
 # SDK
 gradle = "7.0.3"

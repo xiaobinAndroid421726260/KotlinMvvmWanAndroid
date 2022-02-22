@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
+import com.kotlin.mvvm.common.handler_code_collect
+import com.kotlin.mvvm.common.handler_code_un_collect
 import com.kotlin.mvvm.databinding.FragmentHomeBinding
 import com.kotlin.mvvm.ext.setLinearLayoutManager
 import com.youth.banner.Banner
@@ -26,6 +31,7 @@ class HomeFragment : BaseFragment(), ScrollToTop {
     private val mViewModel by viewModels<HomeViewModel>()
     private val mAdapter by lazy { HomeAdapter() }
     private var page = 0
+    private var position = 0
 
     override fun getContentView() = binding.root
 
@@ -50,6 +56,14 @@ class HomeFragment : BaseFragment(), ScrollToTop {
             page++
             mViewModel.getTopBeanJson(page)
         }
+        mAdapter.setCollectionListener { collect, id, position ->
+            this.position = position
+            if (collect) {
+                mViewModel.unCollectList(id)
+            } else {
+                mViewModel.collect(id)
+            }
+        }
         mViewModel.run {
             mBannerLists.observe(this@HomeFragment) {
                 banner.adapter = HomeBannerAdapter(it)
@@ -72,6 +86,19 @@ class HomeFragment : BaseFragment(), ScrollToTop {
                 if (it.curPage == it.pageCount) {
                     mAdapter.loadMoreModule.loadMoreEnd()
                 }
+            }
+            handlerCode.observe(this@HomeFragment) {
+                when (it) {
+                    handler_code_collect -> {
+                        mAdapter.data[position].collect = true
+                        ToastUtils.showShort(StringUtils.getString(R.string.collect_success))
+                    }
+                    handler_code_un_collect -> {
+                        mAdapter.data[position].collect = false
+                        ToastUtils.showShort(StringUtils.getString(R.string.cancel_collect))
+                    }
+                }
+                mAdapter.notifyItemChanged(position + mAdapter.headerLayoutCount)
             }
         }
     }

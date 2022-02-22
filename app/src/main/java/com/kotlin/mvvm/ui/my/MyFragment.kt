@@ -9,9 +9,12 @@ import androidx.fragment.app.viewModels
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseFragment
 import com.kotlin.mvvm.common.ScrollToTop
+import com.kotlin.mvvm.common.handler_code_collect
+import com.kotlin.mvvm.common.handler_code_un_collect
 import com.kotlin.mvvm.databinding.FragmentMyBinding
 import com.kotlin.mvvm.databinding.LayoutEmptyRecyclerBinding
 import com.kotlin.mvvm.ext.*
@@ -39,6 +42,7 @@ class MyFragment : BaseFragment(), ScrollToTop {
     private val mViewModel by viewModels<MyViewModel>()
     private val mRvAdapter by lazy { MyOptionAdapter() }
     private val mAdapter by lazy { MyAdapter() }
+    private var position = 0
 
     override fun getContentView() = binding.root
 
@@ -52,6 +56,14 @@ class MyFragment : BaseFragment(), ScrollToTop {
         mAdapter.setEmptyView(emptyBinding.root)
         binding.refreshLayout.setOnRefreshListener { mViewModel.getWendListJson(0, 5) }
         binding.rvOption.setGridLayoutManager(mRvAdapter, 4)
+        mAdapter.setCollectionListener { collect, id, position ->
+            this.position = position
+            if (collect) {
+                mViewModel.unCollectList(id)
+            } else {
+                mViewModel.collect(id)
+            }
+        }
         observeEvent()
         addDebouncingViews(
             binding.tvLogin,
@@ -59,14 +71,9 @@ class MyFragment : BaseFragment(), ScrollToTop {
             binding.tvMyIntegralRanking,
             binding.clQuestionsAndAnswers
         )
-        mViewModel.getWendListJson(0, 5)
     }
 
     private fun observeEvent() {
-//        mViewModel.mUserInfoBean.observe(this) {
-//            binding.tvName.text = it.userInfo.publicName
-//            binding.tvUserId.text = it.coinInfo.userId.toString()
-//        }
         mViewModel.handlerCode.observe(this) { initRvOption(it) }
         mViewModel.mWendBean.observe(this) {
             if (it.datas.isNotEmpty()) {
@@ -74,6 +81,20 @@ class MyFragment : BaseFragment(), ScrollToTop {
             }
             binding.refreshLayout.finishRefresh(true)
             showContent()
+        }
+        mViewModel.handlerCode.observe(this) {
+            when (it) {
+                handler_code_collect -> {
+                    mAdapter.data[position].collect = true
+                    ToastUtils.showShort(StringUtils.getString(R.string.collect_success))
+                }
+                handler_code_un_collect -> {
+                    mAdapter.data[position].collect = false
+                    ToastUtils.showShort(StringUtils.getString(R.string.cancel_collect))
+                }
+            }
+            val childCount = mAdapter.emptyLayout?.childCount ?: 0
+            mAdapter.notifyItemChanged(position + childCount)
         }
     }
 
@@ -117,6 +138,7 @@ class MyFragment : BaseFragment(), ScrollToTop {
         } else {
             initRvOption(0)
         }
+        mViewModel.getWendListJson(0, 5)
     }
 
     override fun onClickView(view: View?) {

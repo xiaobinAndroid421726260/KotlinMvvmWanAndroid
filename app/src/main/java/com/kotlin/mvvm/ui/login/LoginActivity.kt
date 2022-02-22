@@ -37,9 +37,6 @@ class LoginActivity : BaseActivity() {
             )
         }
         binding.tvRegister.onClick { ActivityUtils.startActivity(RegisterActivity::class.java) }
-        binding.tvForgetPassword.onClick {
-
-        }
     }
 
     override fun initData() {

@@ -37,6 +37,7 @@ class WebViewActivity : BaseActivity() {
         } else {
             val color = getAppThemeColor()
             binding.tvTitle.setTextColor(if (color == Color.WHITE) Color.BLACK else Color.WHITE)
+            binding.x5WebView.setGradientDrawableColor(color)
         }
         setToolbarBackColor(this, binding.toolbar, null)
     }

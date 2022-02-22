@@ -2,6 +2,7 @@ package com.kotlin.mvvm.ui.square
 
 import android.annotation.SuppressLint
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -19,6 +20,8 @@ import com.kotlin.mvvm.ext.startWebViewActivity
  * @Date 2021/12/22 14:31
  */
 class SquareAdapter : BaseQuickAdapter<SquareBean, BaseViewHolder>(R.layout.item_square), LoadMoreModule {
+
+    private lateinit var listener: (collect: Boolean, id: Int, position: Int) -> Unit
 
     @SuppressLint("CheckResult")
     override fun convert(holder: BaseViewHolder, item: SquareBean) {
@@ -44,5 +47,12 @@ class SquareAdapter : BaseQuickAdapter<SquareBean, BaseViewHolder>(R.layout.item
             if (item.collect) R.drawable.ic_like else R.drawable.ic_like_not
         )
         holder.itemView.onClick { startWebViewActivity(item.id, item.link, item.title) }
+        holder.getView<AppCompatImageView>(R.id.iv_collection).onClick {
+            listener.invoke(item.collect, item.id, getItemPosition(item))
+        }
+    }
+
+    fun setCollectionListener(listener: (collect: Boolean, id: Int, position: Int) -> Unit) {
+        this.listener = listener
     }
 }

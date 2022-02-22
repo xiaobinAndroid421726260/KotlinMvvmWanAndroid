@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.drawable.*
 import android.net.Uri
 import android.net.http.SslError
 import android.util.AttributeSet
@@ -11,6 +13,7 @@ import android.webkit.*
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.NetworkUtils
 import com.blankj.utilcode.util.SizeUtils.dp2px
 import com.kotlin.mvvm.R
@@ -76,6 +79,21 @@ class X5WebView @JvmOverloads constructor(
                     mProgressBar?.progress = progress
                 }
             }
+        }
+    }
+
+    /**
+     * 修改加载的进度颜色
+     */
+    @SuppressLint("NewApi")
+    fun setGradientDrawableColor(color: Int) {
+        val colors = intArrayOf(color, color)
+        val drawable = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors)
+        val layerDrawable = mProgressBar?.progressDrawable as LayerDrawable
+        val clipDrawable = layerDrawable.getDrawable(layerDrawable.numberOfLayers - 1) as ClipDrawable
+        clipDrawable.drawable = drawable
+        mProgressBar?.apply {
+            progressDrawable = layerDrawable
         }
     }
 

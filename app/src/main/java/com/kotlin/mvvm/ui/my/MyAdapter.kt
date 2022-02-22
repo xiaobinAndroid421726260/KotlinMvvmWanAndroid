@@ -1,5 +1,6 @@
 package com.kotlin.mvvm.ui.my
 
+import androidx.appcompat.widget.AppCompatImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -16,6 +17,8 @@ import com.kotlin.mvvm.ui.my.bean.WendBean
  */
 class MyAdapter : BaseQuickAdapter<WendBean, BaseViewHolder>(R.layout.item_my), LoadMoreModule {
 
+    private lateinit var listener: (collect: Boolean, id: Int, position: Int) -> Unit
+
     override fun convert(holder: BaseViewHolder, item: WendBean) {
         holder.setText(R.id.tv_time, item.niceDate)
         holder.setText(R.id.tv_title, item.title)
@@ -25,5 +28,12 @@ class MyAdapter : BaseQuickAdapter<WendBean, BaseViewHolder>(R.layout.item_my), 
             if (item.collect) R.drawable.ic_like else R.drawable.ic_like_not
         )
         holder.itemView.onClick { startWebViewActivity(item.id, item.link, item.title) }
+        holder.getView<AppCompatImageView>(R.id.iv_collection).onClick {
+            listener.invoke(item.collect, item.id, getItemPosition(item))
+        }
+    }
+
+    fun setCollectionListener(listener: (collect: Boolean, id: Int, position: Int) -> Unit) {
+        this.listener = listener
     }
 }

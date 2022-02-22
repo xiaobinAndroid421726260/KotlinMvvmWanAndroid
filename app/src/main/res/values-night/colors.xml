@@ -28,13 +28,9 @@
     <color name="sticky_header_bg">#515151</color>
 
     <color name="color_theme_text">#CCFFFFFF</color>//黑暗主题白色文字
-<!--    <color name="accent_red">@color/colorAccent</color>-->
     <color name="accent_pink">@color/colorAccent</color>
     <color name="accent_orange">@color/colorAccent</color>
-<!--    <color name="accent_pale_blue">@color/colorAccent</color>-->
-<!--    <color name="accent_green">@color/colorAccent</color>-->
     <color name="accent_cyan">@color/colorAccent</color>
-<!--    <color name="accent_indigo">@color/colorAccent</color>-->
     <color name="accent_purple">@color/colorAccent</color>
     <color name="accent_brown">@color/colorAccent</color>
 

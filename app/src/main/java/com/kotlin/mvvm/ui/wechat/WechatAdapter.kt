@@ -1,5 +1,6 @@
 package com.kotlin.mvvm.ui.wechat
 
+import androidx.appcompat.widget.AppCompatImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -14,7 +15,11 @@ import com.kotlin.mvvm.ui.wechat.bean.WechatPagerBean
  * @author Db_z
  * @Date 2021/12/23 11:18
  */
-class WechatAdapter : BaseQuickAdapter<WechatPagerBean, BaseViewHolder>(R.layout.item_fragment_pager), LoadMoreModule {
+class WechatAdapter :
+    BaseQuickAdapter<WechatPagerBean, BaseViewHolder>(R.layout.item_fragment_pager),
+    LoadMoreModule {
+
+    private lateinit var listener: (collect: Boolean, id: Int, position: Int) -> Unit
 
     override fun convert(holder: BaseViewHolder, item: WechatPagerBean) {
         holder.setText(
@@ -29,5 +34,12 @@ class WechatAdapter : BaseQuickAdapter<WechatPagerBean, BaseViewHolder>(R.layout
             if (item.collect) R.drawable.ic_like else R.drawable.ic_like_not
         )
         holder.itemView.onClick { startWebViewActivity(item.id, item.link, item.title) }
+        holder.getView<AppCompatImageView>(R.id.iv_collection).onClick {
+            listener.invoke(item.collect, item.id, getItemPosition(item))
+        }
+    }
+
+    fun setCollectionListener(listener: (collect: Boolean, id: Int, position: Int) -> Unit) {
+        this.listener = listener
     }
 }

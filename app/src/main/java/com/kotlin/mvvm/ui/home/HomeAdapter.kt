@@ -2,6 +2,8 @@ package com.kotlin.mvvm.ui.home
 
 import android.annotation.SuppressLint
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
+import com.blankj.utilcode.util.LogUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -21,10 +23,12 @@ import com.kotlin.mvvm.ui.home.bean.HomeBean
  */
 class HomeAdapter : BaseQuickAdapter<HomeBean, BaseViewHolder>(R.layout.item_home), LoadMoreModule {
 
+    private lateinit var listener: (collect: Boolean, id: Int, position: Int) -> Unit
+
     @SuppressLint("CheckResult")
     override fun convert(holder: BaseViewHolder, item: HomeBean) {
         holder.setGone(R.id.tv_top, !item.top)
-        holder.setGone(R.id.tv_refrsh, !item.fresh)
+        holder.setGone(R.id.tv_refresh, !item.fresh)
         holder.setGone(R.id.tv_article_tag, item.tags.isEmpty())
         holder.setText(
             R.id.tv_name,
@@ -46,5 +50,12 @@ class HomeAdapter : BaseQuickAdapter<HomeBean, BaseViewHolder>(R.layout.item_hom
             if (item.collect) R.drawable.ic_like else R.drawable.ic_like_not
         )
         holder.itemView.onClick { startWebViewActivity(item.id, item.link, item.title) }
+        holder.getView<AppCompatImageView>(R.id.iv_collection).onClick {
+            listener.invoke(item.collect, item.id, getItemPosition(item))
+        }
+    }
+
+    fun setCollectionListener(listener: (collect: Boolean, id: Int, position: Int) -> Unit) {
+        this.listener = listener
     }
 }

@@ -179,6 +179,25 @@ interface Api {
     suspend fun getCollectList(@Path("page") page: Int): BaseResponse<BaseListResponse<MutableList<CollectBean>>>
 
     /**
+     * 收藏站内文章
+     */
+    @POST(HttpsApi.collect_list + "{id}/json")
+    suspend fun collectList(@Path("id") id: Int): BaseResponse<String>
+
+    /**
+     * 取消收藏 我的收藏页面
+     */
+    @FormUrlEncoded
+    @POST(HttpsApi.unCollect + "{id}/json")
+    suspend fun unCollect(@Path("id") id: Int, @Field("originId") originId: Int): BaseResponse<String>
+
+    /**
+     * 取消收藏 文章列表
+     */
+    @POST(HttpsApi.unCollect_list + "{id}/json")
+    suspend fun unCollectList(@Path("id") id: Int): BaseResponse<String>
+
+    /**
      * 获取自己的分享列表
      */
     @GET(HttpsApi.get_user_share_list + "{page}/json")

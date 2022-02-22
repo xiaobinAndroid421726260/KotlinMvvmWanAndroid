@@ -32,8 +32,11 @@
     <string name="register_success">注册成功, 请登录</string>
     <string name="login_success">登录成功</string>
     <string name="logout">退出登录</string>
-    <string name="questions_and_answers">问答</string>
+    <string name="questions_and_answers">每日一问</string>
     <string name="not_questions_and_answers">暂无问答列表</string>
+
+    <string name="collect_success">收藏成功</string>
+    <string name="cancel_collect">取消收藏</string>
 
     <string name="level_rank">等级: %d\t\t\t排名: %d</string>
     <string name="my_integral">我的积分</string>
