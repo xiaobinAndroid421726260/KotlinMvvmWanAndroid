@@ -15,7 +15,6 @@ include ':LocalPackage:CircleImageView_aar'
 include ':LocalPackage:ImmersionBar_aar'
 include ':LocalPackage:ImmersionBar_Components_aar'
 include ':LocalPackage:ImmersionBar_Ktx_aar'
-include ':LocalPackage:Luban_aar'
 include ':LocalPackage:SmartRefreshLayout_aar'
 include ':LocalPackage:SmartRefreshHeader_aar'
 

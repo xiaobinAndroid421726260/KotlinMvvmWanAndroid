@@ -88,8 +88,6 @@ dependencies {
     implementation project(path: ':LocalPackage:ImmersionBar_aar')
     implementation project(path: ':LocalPackage:ImmersionBar_Components_aar')
     implementation project(path: ':LocalPackage:ImmersionBar_Ktx_aar')
-    // 图片压缩
-    implementation project(path: ':LocalPackage:Luban_aar')
     // 上拉刷新下拉加载
     implementation project(path: ':LocalPackage:SmartRefreshLayout_aar')
     implementation project(path: ':LocalPackage:SmartRefreshHeader_aar')
