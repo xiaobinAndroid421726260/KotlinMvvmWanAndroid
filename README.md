@@ -4,11 +4,17 @@
 - **SplashScreenApp启动画面**
 - **随意切换主题颜色，适配深色模式**
 #### 效果图展示 
-![项目效果图](微信图片_20220301155148.jpg)
-![项目效果图](微信图片_20220301155153.jpg)
-![项目效果图](微信图片_20220301155156.jpg)
-![项目效果图](微信图片_20220301155203.jpg)
-![项目效果图](微信图片_20220301155206.jpg)
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155148.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155153.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155156.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155200.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155203.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155206.jpg)
 
  #### APK下载：
 - [Github下载](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/app/publish/release/app-publish-release.apk)
