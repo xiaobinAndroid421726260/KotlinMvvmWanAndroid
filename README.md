@@ -11,7 +11,7 @@
 ![项目效果图](微信图片_20220301155206.jpg)
 
  #### APK下载：
-- [Github下载]
+- [Github下载](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/app/publish/release/app-publish-release.apk)
 
 ## 以下开源库，我有一部分是下载成aar包的形式集成在项目中，有需要的可以根据[这里下载](https://mvnrepository.com/)
 ```
