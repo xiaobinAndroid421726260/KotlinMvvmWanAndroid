@@ -1,5 +1,6 @@
 package com.kotlin.mvvm.ui.login
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.blankj.utilcode.util.ActivityUtils
@@ -9,9 +10,9 @@ import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.databinding.ActivityLoginBinding
-import com.kotlin.mvvm.ext.onClick
-import com.kotlin.mvvm.ext.saveUser
-import com.kotlin.mvvm.ext.setToolbarBackColor
+import android.graphics.drawable.GradientDrawable
+import androidx.core.content.ContextCompat
+import com.kotlin.mvvm.ext.*
 
 class LoginActivity : BaseActivity() {
 
@@ -24,7 +25,7 @@ class LoginActivity : BaseActivity() {
         refreshUiState(mViewModel.uiState)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = StringUtils.getString(R.string.login)
-        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
+        binding.toolbar.setNavigationOnClickListener { finish() }
         mViewModel.mLoginRegisterBean.observe(this) {
             saveUser(GsonUtils.toJson(it))
             ToastUtils.showShort(StringUtils.getString(R.string.login_success))
@@ -37,6 +38,9 @@ class LoginActivity : BaseActivity() {
             )
         }
         binding.tvRegister.onClick { ActivityUtils.startActivity(RegisterActivity::class.java) }
+        binding.tvRegister.setTextColor(getThemeTextColor())
+        val drawable = binding.tvLogin.background as GradientDrawable
+        drawable.setColor(getThemeTextColor())
     }
 
     override fun initData() {

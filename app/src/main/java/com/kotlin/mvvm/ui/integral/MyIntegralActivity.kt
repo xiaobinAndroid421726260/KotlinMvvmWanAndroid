@@ -42,7 +42,7 @@ class MyIntegralActivity : BaseActivity() {
         }
         mViewModel.mUserIntegralBean.observe(this){
             headerView.tvTotalIntegral.text = it.coinCount.toString()
-            headerView.tvLevelRank.text = getString(R.string.level_rank, it.level, it.rank.toInt())
+            headerView.tvLevelRank.text = getString(R.string.level_rank, it.level, it.rank)
         }
         mViewModel.mIntegralBean.observe(this) {
             if (it.datas.isNotEmpty()) {

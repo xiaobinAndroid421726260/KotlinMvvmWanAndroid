@@ -30,7 +30,7 @@ class App : Application() {
     init {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, refreshLayout ->
             if (getNightMode()) {
-                refreshLayout.setPrimaryColorsId(R.color.colorPrimary, R.color.white)
+                refreshLayout.setPrimaryColors(ContextCompat.getColor(this, R.color.colorAccent), ContextCompat.getColor(this, R.color.white))
             } else {
                 val color = getAppThemeColor()
                 if (color == Color.WHITE) {

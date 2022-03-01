@@ -100,11 +100,7 @@ class MyFragment : BaseFragment(), ScrollToTop {
 
     override fun initData() {
         activity?.let {
-            val color = if (getNightMode()) {
-                ContextCompat.getColor(it, R.color.colorPrimary)
-            } else {
-                getAppThemeColor()
-            }
+            val color = it.getThemeColor()
             binding.clHead.setBackgroundColor(color)
         }
         if (isLogin()) {
@@ -144,15 +140,11 @@ class MyFragment : BaseFragment(), ScrollToTop {
     override fun onClickView(view: View?) {
         when (view?.id) {
             R.id.tv_login -> startLoginActivity()
-            R.id.tv_my_integral -> {
-                checkLogin {
-                    ActivityUtils.startActivity(MyIntegralActivity::class.java)
-                }
+            R.id.tv_my_integral -> checkLogin {
+                ActivityUtils.startActivity(MyIntegralActivity::class.java)
             }
-            R.id.tv_my_integral_ranking -> {
-                checkLogin {
-                    ActivityUtils.startActivity(IntegralRankActivity::class.java)
-                }
+            R.id.tv_my_integral_ranking -> checkLogin {
+                ActivityUtils.startActivity(IntegralRankActivity::class.java)
             }
             R.id.cl_questions_and_answers -> ActivityUtils.startActivity(QuestionsAnswersActivity::class.java)
         }

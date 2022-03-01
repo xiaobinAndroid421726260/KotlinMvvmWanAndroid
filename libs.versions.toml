@@ -8,8 +8,8 @@
 minsdk = "24"
 targetsdk = "31"
 compilesdk = "31"
-versioncode = "102"
-versionname = "1.0.2"
+versioncode = "103"
+versionname = "1.0.3"
 
 # SDK
 gradle = "7.0.3"
@@ -18,12 +18,9 @@ lifecycle = "2.4.0"
 retrofit = "2.9.0"
 glide = "4.12.0"
 
-
 [libraries]
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-#kotlin-allopen = { module = "org.jetbrains.kotlin:kotlin-allopen", version.ref = "kotlin" }
-#kotlin-noarg = { module = "org.jetbrains.kotlin:kotlin-noarg", version.ref = "kotlin" }
 
 # androidX
 core-ktx = "androidx.core:core-ktx:1.7.0"
@@ -38,8 +35,6 @@ cardview = "androidx.cardview:cardview:1.0.0"
 lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
-#lifecycle-service = { module = "androidx.lifecycle:lifecycle-service", version.ref = "lifecycle" }
-#lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycle" }
 
 # BaseRecyclerView
 baserecyclerview = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7"
@@ -60,7 +55,8 @@ commons-dialogs = "com.afollestad.material-dialogs:commons:0.9.6.0"
 splashscreen = "androidx.core:core-splashscreen:1.0.0-alpha02"
 # PersistentCookieJar
 persistent-cookie-jar = "com.github.franmontiel:PersistentCookieJar:v1.0.1"
-
+# AgentWeb
+agentWeb = "com.github.Justson.AgentWeb:agentweb-core:v5.0.0-alpha.1-androidx"
 # okhttp 日志拦截器
 logging-interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.2"
 # RxAndroid
@@ -77,10 +73,8 @@ glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = 
 glide-transformations = "jp.wasabeef:glide-transformations:4.3.0"
 
 [bundles]
-#gradle = ["gradle", "kotlin-gradle-plugin", "kotlin-allopen", "kotlin-noarg"]
 gradle = ["gradle", "kotlin-gradle-plugin"]
 glide = ["glide-core", "glide-compiler", "glide-transformations"]
 androidx = ["core-ktx", "appcompat", "material", "fragment", "constraintlayout", "recyclerview", "cardview"]
 lifecycle = ["lifecycle-runtime", "lifecycle-livedata", "lifecycle-viewmodel"]
-#lifecycle = ["lifecycle-runtime", "lifecycle-livedata", "lifecycle-viewmodel", "lifecycle-service", "lifecycle-process"]
 retrofit = ["retrofit", "converter-gson", "converter-scalars", "adapter-rxjava3"]

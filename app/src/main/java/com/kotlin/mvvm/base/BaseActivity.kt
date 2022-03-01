@@ -31,6 +31,7 @@ import com.kotlin.mvvm.common.loadsir.LoadingCallback
 import com.kotlin.mvvm.ext.e
 import com.kotlin.mvvm.ext.getAppThemeColor
 import com.kotlin.mvvm.ext.getNightMode
+import com.kotlin.mvvm.ext.getThemeColor
 import com.kotlin.mvvm.popup.LoadingView
 import com.permissionx.guolindev.PermissionX
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -149,11 +150,7 @@ abstract class BaseActivity : AppCompatActivity(), CustomAdapt, BaseView {
     }
 
     open fun initThemeColor() {
-        mAppThemeColor = if (getNightMode()) {
-            ContextCompat.getColor(this, R.color.colorPrimary)
-        } else {
-            getAppThemeColor()
-        }
+        mAppThemeColor = getThemeColor()
         supportActionBar?.setBackgroundDrawable(ColorDrawable(mAppThemeColor))
         initImmersionBar(mAppThemeColor, mAppThemeColor == Color.WHITE)
     }

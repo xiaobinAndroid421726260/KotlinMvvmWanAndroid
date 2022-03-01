@@ -18,7 +18,7 @@
     <string name="back">返回</string>
     <string name="done">完成</string>
     <string name="custom">自定义</string>
-    <string name="current_version">当前版本</string>
+    <string name="current_version">当前版本\t\t &#32;%s</string>
 
     <string name="admin">账号</string>
     <string name="password">密码</string>
@@ -38,7 +38,7 @@
     <string name="collect_success">收藏成功</string>
     <string name="cancel_collect">取消收藏</string>
 
-    <string name="level_rank">等级: %d\t\t\t排名: %d</string>
+    <string name="level_rank">等级: %d\t\t\t排名: %s</string>
     <string name="my_integral">我的积分</string>
     <string name="integral_ranking">积分排行</string>
     <string name="my_share">我的分享</string>

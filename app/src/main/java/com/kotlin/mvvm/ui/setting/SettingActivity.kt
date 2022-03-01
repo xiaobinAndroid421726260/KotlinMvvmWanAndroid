@@ -1,6 +1,7 @@
 package com.kotlin.mvvm.ui.setting
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -22,15 +23,12 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
 
     override fun getContentView() = binding.root
 
-    @SuppressLint("SetTextI18n")
     override fun initView(bundle: Bundle?) {
         setSupportActionBar(binding.toolbar)
         setThemeColor()
         supportActionBar?.title = StringUtils.getString(R.string.action_setting)
         binding.checkbox.isChecked = getNavBar()
-        binding.tvVersion.setTextColor(mAppThemeColor)
-        binding.tvVersionText.text =
-            StringUtils.getString(R.string.current_version) + "  " + AppUtils.getAppVersionName()
+        binding.tvVersionText.text = getString(R.string.current_version, AppUtils.getAppVersionName())
         binding.llTheme.onClick {
             ColorChooserDialog.Builder(this, R.string.choose_theme_color)
                 .backButton(R.string.back)
@@ -65,6 +63,7 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
         }
     }
 
+    @SuppressLint("RestrictedApi")
     override fun initData() {
         setToolbarBackColor(this, binding.toolbar, null)
         binding.tvDarkMode.text = if (getNightMode()) {
@@ -72,6 +71,8 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
         } else {
             StringUtils.getString(R.string.dark_mode)
         }
+        binding.checkbox.supportButtonTintList = ColorStateList.valueOf(getThemeTextColor())
+        binding.tvVersion.setTextColor(getThemeTextColor())
     }
 
     private fun setThemeColor(appThemeColor: Int = mAppThemeColor) {
@@ -85,8 +86,8 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
             }
         }
         binding.viewTheme.setImageDrawable(ColorDrawable(imageColor))
-        if (isLogin()){
-            binding.tvLogout.setBackgroundColor(imageColor)
+        if (isLogin()) {
+            binding.tvLogout.setBackgroundColor(getThemeTextColor())
             binding.tvLogout.visible()
         } else {
             binding.tvLogout.invisible()

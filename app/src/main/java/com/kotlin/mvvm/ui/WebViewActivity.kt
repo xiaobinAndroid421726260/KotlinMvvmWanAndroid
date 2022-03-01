@@ -2,12 +2,14 @@ package com.kotlin.mvvm.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.ViewGroup
+import android.webkit.WebView
+import androidx.core.content.ContextCompat
+import com.just.agentweb.*
+import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.databinding.ActivityWebViewBinding
-import com.kotlin.mvvm.ext.getAppThemeColor
-import com.kotlin.mvvm.ext.getNightMode
-import com.kotlin.mvvm.ext.setToolbarBackColor
-import com.kotlin.mvvm.ext.visible
+import com.kotlin.mvvm.ext.*
 
 class WebViewActivity : BaseActivity() {
 
@@ -15,6 +17,7 @@ class WebViewActivity : BaseActivity() {
     private var id: Int? = 0
     private var url: String? = null
     private var title: String? = null
+    private var mAgentWeb: AgentWeb? = null
 
     override fun getContentView() = binding.root
 
@@ -26,19 +29,66 @@ class WebViewActivity : BaseActivity() {
         }
         setSupportActionBar(binding.toolbar)
         binding.tvTitle.text = "正在加载中..."
-        binding.tvTitle.visible()
-        title?.let { binding.tvTitle.text = it }
-        url?.let { binding.x5WebView.loadUrl(it) }
+        mAgentWeb = AgentWeb.with(this)
+            .setAgentWebParent(
+                binding.llRootView,
+                ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            )
+            .useDefaultIndicator(getThemeTextColor(), 3)
+            .interceptUnkownUrl()
+            .setAgentWebWebSettings(AgentWebSettingsImpl.getInstance())
+            .setSecurityType(AgentWeb.SecurityType.STRICT_CHECK)
+            /**
+             * 直接打开跳转页 DERECT
+             * 咨询用户是否打开 ASK
+             * 禁止打开其他页面 DISALLOW
+             */
+            .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.DISALLOW)
+            .setWebChromeClient(object : WebChromeClient() {
+                override fun onReceivedTitle(view: WebView?, title: String?) {
+                    binding.tvTitle.text = title
+                    super.onReceivedTitle(view, title)
+                }
+            })
+            .createAgentWeb()
+            .ready()
+            .get()
+        mAgentWeb?.webCreator?.webView?.run {
+            overScrollMode = WebView.OVER_SCROLL_NEVER
+            settings.run {
+                javaScriptCanOpenWindowsAutomatically = false
+                loadsImagesAutomatically = true
+                useWideViewPort = true
+                loadWithOverviewMode = true
+            }
+        }
+        mAgentWeb?.urlLoader?.loadUrl(url)
     }
 
     override fun initData() {
         if (getNightMode()) {
             binding.tvTitle.setTextColor(Color.WHITE)
         } else {
-            val color = getAppThemeColor()
-            binding.tvTitle.setTextColor(if (color == Color.WHITE) Color.BLACK else Color.WHITE)
-            binding.x5WebView.setGradientDrawableColor(color)
+            binding.tvTitle.setTextColor(if (getAppThemeColor() == Color.WHITE) Color.BLACK else Color.WHITE)
         }
         setToolbarBackColor(this, binding.toolbar, null)
+    }
+
+    override fun onPause() {
+        mAgentWeb?.webLifeCycle?.onPause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        mAgentWeb?.webLifeCycle?.onResume()
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        mAgentWeb?.webLifeCycle?.onDestroy()
+        super.onDestroy()
     }
 }

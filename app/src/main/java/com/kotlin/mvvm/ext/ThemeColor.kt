@@ -1,12 +1,14 @@
 package com.kotlin.mvvm.ext
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
@@ -21,6 +23,20 @@ import com.kotlin.mvvm.R
  */
 
 /**
+ * 获取主题的颜色
+ */
+fun Context.getThemeColor() =
+    if (getNightMode()) ContextCompat.getColor(this, R.color.colorPrimary) else getAppThemeColor()
+
+/**
+ * 获取主题中字体颜色 （特殊的地方也需要 比如加载进度，比如背景等等）
+ */
+fun Context.getThemeTextColor() = if (getThemeColor() == Color.WHITE) ContextCompat.getColor(
+    this,
+    R.color.black
+) else getThemeColor()
+
+/**
  * 设置主题 Toolbar 背景颜色
  */
 @SuppressLint("UseCompatLoadingForDrawables")
@@ -31,11 +47,7 @@ fun setToolbarBackColor(
     isBackPressed: Boolean = true,
     navigationListener: (() -> Unit)? = null
 ) {
-    val color = if (getNightMode()) {
-        ContextCompat.getColor(activity, R.color.colorPrimary)
-    } else {
-        getAppThemeColor()
-    }
+    val color = activity.getThemeColor()
     if (getNightMode()) {
         setToolbarWhiteExceptColor(activity, toolbar, color, isBackPressed, navigationListener)
     } else {
