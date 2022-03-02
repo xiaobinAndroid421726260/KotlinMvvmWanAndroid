@@ -1,7 +1,7 @@
 #### 一个Kotlin + 协程 + MVVM 的wanandroid项目
 
 - **Kotlin语言编程，协程和MVVM架构**
-- **下载导入本地aar包、7.0.2gradle插件、libs.versions.toml管理版本**
+- **下载导入本地aar包、7.1.1gradle插件、libs.versions.toml管理版本**
 - **SplashScreenApp启动画面**
 - **随意切换主题颜色，适配深色模式**
 
