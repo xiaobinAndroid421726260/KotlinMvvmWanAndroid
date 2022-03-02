@@ -1,5 +1,6 @@
 package com.kotlin.mvvm.ui.share
 
+import androidx.appcompat.widget.AppCompatImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -16,6 +17,8 @@ import com.kotlin.mvvm.ui.share.bean.Share
  */
 class ShareAdapter : BaseQuickAdapter<Share, BaseViewHolder>(R.layout.item_share), LoadMoreModule {
 
+    private lateinit var listener: (collect: Boolean, id: Int, position: Int) -> Unit
+
     override fun convert(holder: BaseViewHolder, item: Share) {
         holder.setText(
             R.id.tv_name,
@@ -29,5 +32,12 @@ class ShareAdapter : BaseQuickAdapter<Share, BaseViewHolder>(R.layout.item_share
             if (item.collect) R.drawable.ic_like else R.drawable.ic_like_not
         )
         holder.itemView.onClick { startWebViewActivity(item.id, item.link, item.title) }
+        holder.getView<AppCompatImageView>(R.id.iv_collection).onClick {
+            listener.invoke(item.collect, item.id, getItemPosition(item))
+        }
+    }
+
+    fun setCollectionListener(listener: (collect: Boolean, id: Int, position: Int) -> Unit) {
+        this.listener = listener
     }
 }

@@ -3,9 +3,12 @@ package com.kotlin.mvvm.ui.share
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
+import com.kotlin.mvvm.common.handler_code_collect
+import com.kotlin.mvvm.common.handler_code_un_collect
 import com.kotlin.mvvm.databinding.ActivityShareListBinding
 import com.kotlin.mvvm.ext.onClick
 import com.kotlin.mvvm.ext.setLinearLayoutManager
@@ -17,6 +20,7 @@ class ShareListActivity : BaseActivity() {
     private val mViewModel by viewModels<ShareViewModel>()
     private val mAdapter by lazy { ShareAdapter() }
     private var page = 1
+    private var position = 0
 
     override fun getContentView() = binding.root
 
@@ -35,6 +39,14 @@ class ShareListActivity : BaseActivity() {
             page++
             mViewModel.getUserShareList(page)
         }
+        mAdapter.setCollectionListener { collect, id, position ->
+            this.position = position
+            if (collect) {
+                mViewModel.unCollectList(id)
+            } else {
+                mViewModel.collect(id)
+            }
+        }
         binding.actionButton.onClick { binding.recyclerView.smoothScrollToPosition(0) }
         mViewModel.mShareBean.observe(this) {
             if (it.shareArticles.datas.isNotEmpty()) {
@@ -52,6 +64,19 @@ class ShareListActivity : BaseActivity() {
             } else {
                 showEmpty()
             }
+        }
+        mViewModel.handlerCode.observe(this) {
+            when (it) {
+                handler_code_collect -> {
+                    mAdapter.data[position].collect = true
+                    ToastUtils.showShort(StringUtils.getString(R.string.collect_success))
+                }
+                handler_code_un_collect -> {
+                    mAdapter.data[position].collect = false
+                    ToastUtils.showShort(StringUtils.getString(R.string.cancel_collect))
+                }
+            }
+            mAdapter.notifyItemChanged(position)
         }
         mViewModel.getUserShareList(page)
     }

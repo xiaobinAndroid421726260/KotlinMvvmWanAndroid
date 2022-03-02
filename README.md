@@ -1,14 +1,35 @@
 #### 一个Kotlin + 协程 + MVVM 的wanandroid项目
+
 - **Kotlin语言编程，协程和MVVM架构**
-- **下载导入本地aar包，gradle插件管理版本**
+- **下载导入本地aar包、7.0.2gradle插件、libs.versions.toml管理版本**
 - **SplashScreenApp启动画面**
 - **随意切换主题颜色，适配深色模式**
+
+#### 功能展示
+
+* 首页、广场
+* 公众号
+* 体系、导航
+* 项目
+* 我的(包含积分、排行、分享、收藏、站内消息、每日一问)
+* 帐号注册、登录
+* 搜索，包含热搜和搜索历史
+* 切换主题颜色、黑白主题模式、适配深色模式
+* 导航栏跟随主题颜色
+
 #### 效果图展示 
-![项目效果图](微信图片_20220301155148.jpg)
-![项目效果图](微信图片_20220301155153.jpg)
-![项目效果图](微信图片_20220301155156.jpg)
-![项目效果图](微信图片_20220301155203.jpg)
-![项目效果图](微信图片_20220301155206.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155148.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155153.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155156.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155200.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155203.jpg)
+
+![项目效果图](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/20220301155206.jpg)
 
  #### APK下载：
 - [Github下载](https://raw.githubusercontent.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid/master/app/publish/release/app-publish-release.apk)
@@ -40,6 +61,9 @@ implementation project(path: ':LocalPackage:SmartRefreshHeader_aar')
 - [一个强大并且灵活的RecyclerViewAdapter-BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper))
 - [基于MMKV内存映射的移动端通用 key-value 组件-MMKV](https://github.com/Tencent/MMKV)
 - [基于Android WebView的一个强大的库-Agentweb](https://github.com/Justson/AgentWeb)
+
+## 项目地址
+- [Github下载](https://github.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid)
 
 ## 特别感谢
 - 感谢WanAndroid网站提供的[开放API](https://www.wanandroid.com/blog/show/2), 和里面的一些优秀开源项目和文章

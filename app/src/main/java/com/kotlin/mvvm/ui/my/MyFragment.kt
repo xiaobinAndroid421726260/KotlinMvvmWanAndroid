@@ -93,8 +93,7 @@ class MyFragment : BaseFragment(), ScrollToTop {
                     ToastUtils.showShort(StringUtils.getString(R.string.cancel_collect))
                 }
             }
-            val childCount = mAdapter.emptyLayout?.childCount ?: 0
-            mAdapter.notifyItemChanged(position + childCount)
+            mAdapter.notifyItemChanged(position)
         }
     }
 

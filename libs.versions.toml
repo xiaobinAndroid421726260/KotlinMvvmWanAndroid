@@ -6,8 +6,8 @@
 [versions]
 # android defaultConfig
 minsdk = "24"
-targetsdk = "31"
-compilesdk = "31"
+targetsdk = "32"
+compilesdk = "32"
 versioncode = "103"
 versionname = "1.0.3"
 
