@@ -72,14 +72,14 @@ abstract class BaseFragment : Fragment(), CustomAdapt, BaseView {
         savedInstanceState: Bundle?
     ): View? {
         setWindowConfigure()
-        if (isAnsycLoadView()) {
+        if (isAsyncLoadView()) {
             initRootView()
             onCreateAsyncView(inflater, container)
         } else {
             mContentView = getContentView()
         }
         return mRootView ?: mContentView
-//        return if (isAnsycLoadView()) if (null != mRootView) mRootView else mContentView else mContentView
+//        return if (isAsyncLoadView()) if (null != mRootView) mRootView else mContentView else mContentView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -109,6 +109,7 @@ abstract class BaseFragment : Fragment(), CustomAdapt, BaseView {
                         UiState.LoadEnd -> dismissLoadView()
                         UiState.LoadError -> dismissLoadView()
                         UiState.LoadComplete -> dismissLoadView()
+                        else -> dismissLoadView()
                     }
                 }
             }
@@ -158,7 +159,7 @@ abstract class BaseFragment : Fragment(), CustomAdapt, BaseView {
      */
     private fun onResumeLoad() {
         alwaysNeedReload()
-        if (!isAnsycLoadView()) {
+        if (!isAsyncLoadView()) {
             if (isFirstLoad) {
                 initData()
                 isFirstLoad = false
@@ -261,7 +262,7 @@ abstract class BaseFragment : Fragment(), CustomAdapt, BaseView {
      *
      * @return
      */
-    protected open fun isAnsycLoadView() = false
+    protected open fun isAsyncLoadView() = false
 
     private fun initRootView() {
         mRootView = FrameLayout(requireActivity().applicationContext)
@@ -275,7 +276,7 @@ abstract class BaseFragment : Fragment(), CustomAdapt, BaseView {
      * 设置视图
      */
     protected fun setContentView(view: View?) {
-        if (isAnsycLoadView()) {
+        if (isAsyncLoadView()) {
             mRootView?.removeAllViews()
             mRootView?.addView(view)
             isAsyncView = true
