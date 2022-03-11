@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.StringUtils
@@ -50,6 +51,8 @@ class MyFragment : BaseFragment(), ScrollToTop {
         setLoadSir(binding.refreshLayout)
         binding.refreshLayout.setEnableLoadMore(false)
         binding.recyclerView.setLinearLayoutManager(mAdapter)
+        val animator = binding.recyclerView.itemAnimator as SimpleItemAnimator
+        animator.supportsChangeAnimations = false
         val emptyBinding =
             LayoutEmptyRecyclerBinding.inflate(layoutInflater, binding.recyclerView, false)
         emptyBinding.tvEmpty.text = StringUtils.getString(R.string.not_questions_and_answers)
