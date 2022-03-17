@@ -8,8 +8,8 @@
 minsdk = "24"
 targetsdk = "31"
 compilesdk = "31"
-versioncode = "103"
-versionname = "1.0.3"
+versioncode = "104"
+versionname = "1.0.4"
 
 # SDK
 kotlin = "1.6.10"
