@@ -4,12 +4,16 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.ViewGroup
 import android.webkit.WebView
-import androidx.core.content.ContextCompat
-import com.just.agentweb.*
-import com.kotlin.mvvm.R
+import com.just.agentweb.AgentWeb
+import com.just.agentweb.AgentWebSettingsImpl
+import com.just.agentweb.DefaultWebClient
+import com.just.agentweb.WebChromeClient
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.databinding.ActivityWebViewBinding
-import com.kotlin.mvvm.ext.*
+import com.kotlin.mvvm.ext.getAppThemeColor
+import com.kotlin.mvvm.ext.getNightMode
+import com.kotlin.mvvm.ext.getThemeTextColor
+import com.kotlin.mvvm.ext.setToolbarBackColor
 
 class WebViewActivity : BaseActivity() {
 

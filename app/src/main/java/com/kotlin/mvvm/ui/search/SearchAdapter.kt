@@ -19,7 +19,7 @@ class SearchAdapter : BaseQuickAdapter<SearchBean, BaseViewHolder>(R.layout.item
     override fun convert(holder: BaseViewHolder, item: SearchBean) {
         holder.setText(
             R.id.tv_name,
-            if (item.author.isNotEmpty()) item.author else item.shareUser
+            item.author.ifEmpty { item.shareUser }
         )
         holder.setText(R.id.tv_time, item.niceDate)
         holder.setText(R.id.tv_title, item.title)

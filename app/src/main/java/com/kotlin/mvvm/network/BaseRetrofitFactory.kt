@@ -26,52 +26,36 @@ abstract class BaseRetrofitFactory {
     protected abstract fun handleBuilder(builder: OkHttpClient.Builder)
     protected abstract fun retrofitBuilder(builder: Retrofit.Builder)
 
+//    private val sslSocketFactory = HttpSslFactory.generateSslConfig()?.sslSocketFactory
+//    private val trustManager = HttpSslFactory.generateSslConfig()?.trustManager
+
     companion object {
-        private const val DEFAULT_TIMEOUT = 20
+        private const val DEFAULT_TIMEOUT = 20L
     }
 
     private val okHttpClient: OkHttpClient
         get() {
-            val mOkHttpClientBuilder = OkHttpClient.Builder()
-            // 设置超时时间
-            mOkHttpClientBuilder.connectTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)
-            mOkHttpClientBuilder.readTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)
-            mOkHttpClientBuilder.writeTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)
-            mOkHttpClientBuilder.retryOnConnectionFailure(true) // 连接失败时重试
-            // 添加头部拦截器
-            mOkHttpClientBuilder.addInterceptor(NetworkStatusInterceptor())
-            // 日志拦截器
-            mOkHttpClientBuilder.addInterceptor(HttpLoggingInterceptor().apply {
-//            level = if (isShowLog) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-                level =
-                    if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
-            })
-            mOkHttpClientBuilder.addInterceptor(HeadersInterceptor())
-            handleBuilder(mOkHttpClientBuilder)
-//            mOkHttpClient = mOkHttpClientBuilder.build()
+            val mOkHttpClientBuilder = OkHttpClient.Builder().apply {
+                // 设置超时时间
+                connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                retryOnConnectionFailure(true) // 连接失败时重试
+//                // https证书免验证, 信任所有https请求
+//                hostnameVerifier(HttpSslFactory.generateUnSafeHostnameVerifier())
+//                if (sslSocketFactory != null && trustManager != null) {
+//                    sslSocketFactory(sslSocketFactory, trustManager)
+//                }
+                // 日志拦截器
+                addInterceptor(HttpLoggingInterceptor().apply {
+                    level =
+                        if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
+                })
+                addInterceptor(HeadersInterceptor())
+                handleBuilder(this)
+            }
             return mOkHttpClientBuilder.build()
         }
-
-//    init {
-//        val mOkHttpClientBuilder = OkHttpClient.Builder()
-//        // 设置超时时间
-//        mOkHttpClientBuilder.connectTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)
-//        mOkHttpClientBuilder.readTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)
-//        mOkHttpClientBuilder.writeTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)
-//        mOkHttpClientBuilder.retryOnConnectionFailure(true) // 连接失败时重试
-//        // 添加头部拦截器
-//        mOkHttpClientBuilder.addInterceptor(NetworkStatusInterceptor())
-//        // 日志拦截器
-//        mOkHttpClientBuilder.addInterceptor(HttpLoggingInterceptor().apply {
-////            level = if (isShowLog) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-//            level =
-//                if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
-//        })
-//        mOkHttpClientBuilder.addInterceptor(HeadersInterceptor())
-//        handleBuilder(mOkHttpClientBuilder)
-//        mOkHttpClient = mOkHttpClientBuilder.build()
-//        getService(Api::class.java)
-//    }
 
     fun <T> getService(
         serviceClass: Class<T>,

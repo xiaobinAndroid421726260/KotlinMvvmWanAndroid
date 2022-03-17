@@ -30,7 +30,6 @@ import com.kotlin.mvvm.common.loadsir.ErrorCallback
 import com.kotlin.mvvm.common.loadsir.LoadingCallback
 import com.kotlin.mvvm.ext.e
 import com.kotlin.mvvm.ext.getAppThemeColor
-import com.kotlin.mvvm.ext.getNightMode
 import com.kotlin.mvvm.ext.getThemeColor
 import com.kotlin.mvvm.popup.LoadingView
 import com.permissionx.guolindev.PermissionX
@@ -233,11 +232,11 @@ abstract class BaseActivity : AppCompatActivity(), CustomAdapt, BaseView {
      */
     protected open fun isNeedReload() = true
 
-    fun showLoadView() {
+    private fun showLoadView() {
         LoadingView.getInstance(this).showPopupWindow()
     }
 
-    fun dismissLoadView() {
+    private fun dismissLoadView() {
         LoadingView.getInstance(this).delayDismiss()
     }
 

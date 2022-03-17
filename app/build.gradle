@@ -65,7 +65,6 @@ dependencies {
     implementation libs.bundles.retrofit
     implementation libs.logging.interceptor
     implementation libs.commons.dialogs
-
     implementation libs.baserecyclerview
     implementation libs.mmkv
     implementation libs.basepopup

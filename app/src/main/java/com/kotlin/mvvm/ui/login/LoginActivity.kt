@@ -1,6 +1,6 @@
 package com.kotlin.mvvm.ui.login
 
-import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.blankj.utilcode.util.ActivityUtils
@@ -10,9 +10,10 @@ import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.databinding.ActivityLoginBinding
-import android.graphics.drawable.GradientDrawable
-import androidx.core.content.ContextCompat
-import com.kotlin.mvvm.ext.*
+import com.kotlin.mvvm.ext.getThemeTextColor
+import com.kotlin.mvvm.ext.onClick
+import com.kotlin.mvvm.ext.saveUser
+import com.kotlin.mvvm.ext.setToolbarBackColor
 
 class LoginActivity : BaseActivity() {
 

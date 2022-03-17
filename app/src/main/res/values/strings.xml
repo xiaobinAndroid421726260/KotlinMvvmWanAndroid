@@ -57,6 +57,12 @@
     <string name="git_url_wan_android">https://github.com/xiaobinAndroid421726260/KotlinMvvmWanAndroid.git</string>
 
     <string name="FloatingActionButtonBehavior">com.kotlin.mvvm.view.FloatingActionButtonBehavior</string>
+
+    <string name="common_connect_error">网络连接错误</string>
+    <string name="common_connect_timeout">网络请求超时</string>
+    <string name="common_bad_network">网络请求出错</string>
+    <string name="common_parse_error">解析错误</string>
+    <string name="common_unknown_error">未知错误</string>
     <!-- 网络连接错误，请稍后重试 -->
     <string name="network_connection_error">Network connection error, please try again later</string>
 </resources>

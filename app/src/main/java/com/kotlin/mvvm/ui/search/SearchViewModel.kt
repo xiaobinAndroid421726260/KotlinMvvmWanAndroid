@@ -3,10 +3,11 @@ package com.kotlin.mvvm.ui.search
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
-import com.kotlin.mvvm.common.BaseListResponse
-import com.kotlin.mvvm.common.BaseResult
-import com.kotlin.mvvm.common.fold
+import com.kotlin.mvvm.common.base.BaseListResponse
+import com.kotlin.mvvm.common.base.fold
 import com.kotlin.mvvm.network.RetrofitFactory
+import com.kotlin.mvvm.network.callRequest
+import com.kotlin.mvvm.network.handlerResponse
 import com.kotlin.mvvm.ui.search.bean.SearchBean
 import com.kotlin.mvvm.ui.share.bean.HotKeyBean
 import kotlinx.coroutines.Dispatchers
@@ -27,11 +28,8 @@ class SearchViewModel : BaseViewModel() {
 
     fun getArticleQuery(page: Int, k: String = "") = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.getArticleQuery(page, k)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getArticleQuery${result.errorMsg}"))
+            callRequest {
+                handlerResponse(RetrofitFactory.instance.service.getArticleQuery(page, k))
             }
         }
         mK.value = k
@@ -45,12 +43,7 @@ class SearchViewModel : BaseViewModel() {
 
     fun getSearchHotKeyJson() = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.getSearchHotKeyJson()
-            if (result.errorCode == 0) {
-                BaseResult.success(result.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getSearchHotKeyJson${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getSearchHotKeyJson()) }
         }
         baseResponse.fold({
             mHotKeyBean.value = it
@@ -62,7 +55,7 @@ class SearchViewModel : BaseViewModel() {
     /**
      * 点击搜索热词、历史记录搜索
      */
-    fun responseSearch(k: String){
+    fun responseSearch(k: String) {
         mSearch.value = k
     }
 }

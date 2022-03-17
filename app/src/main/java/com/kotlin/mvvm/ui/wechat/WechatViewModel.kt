@@ -3,8 +3,13 @@ package com.kotlin.mvvm.ui.wechat
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
-import com.kotlin.mvvm.common.*
+import com.kotlin.mvvm.common.base.BaseListResponse
+import com.kotlin.mvvm.common.base.fold
+import com.kotlin.mvvm.common.handler_code_collect
+import com.kotlin.mvvm.common.handler_code_un_collect
 import com.kotlin.mvvm.network.RetrofitFactory
+import com.kotlin.mvvm.network.callRequest
+import com.kotlin.mvvm.network.handlerResponse
 import com.kotlin.mvvm.ui.wechat.bean.WechatBean
 import com.kotlin.mvvm.ui.wechat.bean.WechatPagerBean
 import kotlinx.coroutines.Dispatchers
@@ -23,11 +28,8 @@ class WechatViewModel : BaseViewModel() {
 
     fun getWechatArticleJson() = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val wechatBean = RetrofitFactory.instance.service.getWechatArticleJson()
-            if (wechatBean.errorCode == 0) {
-                BaseResult.success(wechatBean.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getWechatArticleJson${wechatBean.errorMsg}"))
+            callRequest {
+                handlerResponse(RetrofitFactory.instance.service.getWechatArticleJson())
             }
         }
         baseResponse.fold({
@@ -39,12 +41,13 @@ class WechatViewModel : BaseViewModel() {
 
     fun getUserWechatArticleJson(user_id: Int?, page: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val articleBean =
-                RetrofitFactory.instance.service.getUserWechatArticleJson(user_id, page)
-            if (articleBean.errorCode == 0) {
-                BaseResult.success(articleBean.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getUserWechatArticleJson${articleBean.errorMsg}"))
+            callRequest {
+                handlerResponse(
+                    RetrofitFactory.instance.service.getUserWechatArticleJson(
+                        user_id,
+                        page
+                    )
+                )
             }
         }
         baseResponse.fold({
@@ -56,11 +59,8 @@ class WechatViewModel : BaseViewModel() {
 
     fun collect(id: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.collectList(id)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.errorCode)
-            } else {
-                BaseResult.failure(Throwable("Failed to collect${result.errorMsg}"))
+            callRequest {
+                handlerResponse(RetrofitFactory.instance.service.collectList(id))
             }
         }
         baseResponse.fold({
@@ -72,11 +72,8 @@ class WechatViewModel : BaseViewModel() {
 
     fun unCollectList(id: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.unCollectList(id)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.errorCode)
-            } else {
-                BaseResult.failure(Throwable("Failed to unCollect${result.errorMsg}"))
+            callRequest {
+                handlerResponse(RetrofitFactory.instance.service.unCollectList(id))
             }
         }
         baseResponse.fold({

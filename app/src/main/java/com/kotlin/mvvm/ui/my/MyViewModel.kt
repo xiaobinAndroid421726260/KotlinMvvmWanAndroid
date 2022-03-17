@@ -3,8 +3,13 @@ package com.kotlin.mvvm.ui.my
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
-import com.kotlin.mvvm.common.*
+import com.kotlin.mvvm.common.base.BaseListResponse
+import com.kotlin.mvvm.common.base.fold
+import com.kotlin.mvvm.common.handler_code_collect
+import com.kotlin.mvvm.common.handler_code_un_collect
 import com.kotlin.mvvm.network.RetrofitFactory
+import com.kotlin.mvvm.network.callRequest
+import com.kotlin.mvvm.network.handlerResponse
 import com.kotlin.mvvm.ui.my.bean.WendBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -20,12 +25,14 @@ class MyViewModel : BaseViewModel() {
     val mWendBean = MutableLiveData<BaseListResponse<MutableList<WendBean>>>()
 
     fun getWendListJson(page: Int, page_size: Int = 20) = launchUI {
-        val baseResponse = withContext(Dispatchers.IO){
-            val result = RetrofitFactory.instance.service.getWendListJson(page, page_size)
-            if (result.errorCode == 0){
-                BaseResult.success(result.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getWendListJson${result.errorMsg}"))
+        val baseResponse = withContext(Dispatchers.IO) {
+            callRequest {
+                handlerResponse(
+                    RetrofitFactory.instance.service.getWendListJson(
+                        page,
+                        page_size
+                    )
+                )
             }
         }
         baseResponse.fold({
@@ -36,13 +43,8 @@ class MyViewModel : BaseViewModel() {
     }
 
     fun getMessageCountUnread() = launchUI {
-        val baseResponse = withContext(Dispatchers.IO){
-            val result = RetrofitFactory.instance.service.getMessageCountUnread()
-            if (result.errorCode == 0){
-                BaseResult.success(result.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getMessageCountUnread${result.errorMsg}"))
-            }
+        val baseResponse = withContext(Dispatchers.IO) {
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getMessageCountUnread()) }
         }
         baseResponse.fold({
             handlerCode.value = it
@@ -53,12 +55,7 @@ class MyViewModel : BaseViewModel() {
 
     fun collect(id: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.collectList(id)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.errorCode)
-            } else {
-                BaseResult.failure(Throwable("Failed to collect${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.collectList(id)) }
         }
         baseResponse.fold({
             handlerCode.value = handler_code_collect
@@ -69,12 +66,7 @@ class MyViewModel : BaseViewModel() {
 
     fun unCollectList(id: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.unCollectList(id)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.errorCode)
-            } else {
-                BaseResult.failure(Throwable("Failed to unCollect${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.unCollectList(id)) }
         }
         baseResponse.fold({
             handlerCode.value = handler_code_un_collect

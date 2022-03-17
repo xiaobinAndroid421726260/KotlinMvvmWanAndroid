@@ -3,10 +3,11 @@ package com.kotlin.mvvm.ui.message
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
-import com.kotlin.mvvm.common.BaseListResponse
-import com.kotlin.mvvm.common.BaseResult
-import com.kotlin.mvvm.common.fold
+import com.kotlin.mvvm.common.base.BaseListResponse
+import com.kotlin.mvvm.common.base.fold
 import com.kotlin.mvvm.network.RetrofitFactory
+import com.kotlin.mvvm.network.callRequest
+import com.kotlin.mvvm.network.handlerResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -23,12 +24,7 @@ class MessageViewModel : BaseViewModel() {
 
     fun getMessageReadList(page: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.getMessageReadList(page)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getMessageUnreadList${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getMessageReadList(page)) }
         }
         baseResponse.fold({
             mReadListBean.value = it
@@ -39,12 +35,7 @@ class MessageViewModel : BaseViewModel() {
 
     fun getMessageUnreadList(page: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.getMessageUnreadList(page)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getMessageUnreadList${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getMessageUnreadList(page)) }
         }
         baseResponse.fold({
             mUnreadListBean.value = it

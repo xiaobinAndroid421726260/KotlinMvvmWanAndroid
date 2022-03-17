@@ -21,7 +21,7 @@ class SplashActivity : BaseActivity() {
 
     private val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
     private lateinit var splashScreen: SplashScreen
-    private val defaultExitDuration = 1000.toLong()
+    private val defaultExitDuration = 1000L
 
     override fun setWindowConfigure() {
         splashScreen = installSplashScreen()
@@ -31,19 +31,19 @@ class SplashActivity : BaseActivity() {
 
     override fun initView(bundle: Bundle?) {
         initImmersionBar(ContextCompat.getColor(this, R.color.colorAccent))
-        splashScreen.setOnExitAnimationListener { provider ->
-            showSplashIconExitAnimator(provider.iconView) {
-                provider.remove()
-            }
+//        splashScreen.setOnExitAnimationListener { provider ->
+//            showSplashIconExitAnimator(provider.iconView) {
+//                provider.remove()
+//            }
             // 两个动画的时长可以不一样，这里监听 splashScreen 动画结束
-            showSplashExitAnimator(provider.view) {
-                provider.remove()
+//            showSplashExitAnimator(provider.view) {
+//                provider.remove()
                 // 进入主界面，顺便给个 FadeOut 退场动画
                 ActivityUtils.startActivity(MainActivity::class.java)
-                finish()
-                overridePendingTransition(0, R.anim.fade_out)
-            }
-        }
+                ActivityUtils.finishActivity(this)
+//                overridePendingTransition(0, R.anim.fade_out)
+//            }
+//        }
     }
 
     // Show exit animator for splash icon.

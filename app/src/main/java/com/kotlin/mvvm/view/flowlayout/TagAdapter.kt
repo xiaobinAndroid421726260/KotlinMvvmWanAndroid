@@ -1,7 +1,6 @@
 package com.kotlin.mvvm.view.flowlayout
 
 import android.view.View
-import java.util.*
 
 /**
  * description:

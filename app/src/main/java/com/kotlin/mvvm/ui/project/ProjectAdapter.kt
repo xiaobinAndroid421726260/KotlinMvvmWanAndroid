@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.kotlin.mvvm.R
+import com.kotlin.mvvm.ext.checkLogin
 import com.kotlin.mvvm.ext.onClick
 import com.kotlin.mvvm.ext.startWebViewActivity
 import com.kotlin.mvvm.ui.project.bean.ProjectPagerBean
@@ -33,7 +34,7 @@ class ProjectAdapter : BaseQuickAdapter<ProjectPagerBean, BaseViewHolder>(R.layo
         }
         holder.setText(R.id.tv_title, item.title)
         holder.setText(R.id.tv_content, item.desc)
-        holder.setText(R.id.tv_name, if (item.author.isNotEmpty()) item.author else item.shareUser)
+        holder.setText(R.id.tv_name, item.author.ifEmpty { item.shareUser })
         holder.setText(R.id.tv_time, item.niceDate)
         holder.setImageResource(
             R.id.iv_collection,
@@ -41,7 +42,9 @@ class ProjectAdapter : BaseQuickAdapter<ProjectPagerBean, BaseViewHolder>(R.layo
         )
         holder.itemView.onClick { startWebViewActivity(item.id, item.link, item.title) }
         holder.getView<AppCompatImageView>(R.id.iv_collection).onClick {
-            listener.invoke(item.collect, item.id, getItemPosition(item))
+            checkLogin {
+                listener.invoke(item.collect, item.id, getItemPosition(item))
+            }
         }
     }
 

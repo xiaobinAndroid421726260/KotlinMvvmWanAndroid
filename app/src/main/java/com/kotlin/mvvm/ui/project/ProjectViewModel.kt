@@ -3,8 +3,13 @@ package com.kotlin.mvvm.ui.project
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
-import com.kotlin.mvvm.common.*
+import com.kotlin.mvvm.common.base.BaseListResponse
+import com.kotlin.mvvm.common.base.fold
+import com.kotlin.mvvm.common.handler_code_collect
+import com.kotlin.mvvm.common.handler_code_un_collect
 import com.kotlin.mvvm.network.RetrofitFactory
+import com.kotlin.mvvm.network.callRequest
+import com.kotlin.mvvm.network.handlerResponse
 import com.kotlin.mvvm.ui.project.bean.ProjectBean
 import com.kotlin.mvvm.ui.project.bean.ProjectPagerBean
 import kotlinx.coroutines.Dispatchers
@@ -23,12 +28,7 @@ class ProjectViewModel : BaseViewModel() {
 
     fun getProjectTreeJson() = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val projectBean = RetrofitFactory.instance.service.getProjectTreeJson()
-            if (projectBean.errorCode == 0) {
-                BaseResult.success(projectBean.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getProjectTreeJson${projectBean.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getProjectTreeJson()) }
         }
         baseResponse.fold({
             mProjectBean.value = it
@@ -39,12 +39,7 @@ class ProjectViewModel : BaseViewModel() {
 
     fun getProjectCidJson(page: Int, cid: Int?) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val projectPagerBean = RetrofitFactory.instance.service.getProjectCidJson(page, cid)
-            if (projectPagerBean.errorCode == 0) {
-                BaseResult.success(projectPagerBean.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getProjectCidJson${projectPagerBean.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getProjectCidJson(page, cid)) }
         }
         baseResponse.fold({
             mProjectPagerBean.value = it
@@ -55,12 +50,7 @@ class ProjectViewModel : BaseViewModel() {
 
     fun collect(id: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.collectList(id)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.errorCode)
-            } else {
-                BaseResult.failure(Throwable("Failed to collect${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.collectList(id)) }
         }
         baseResponse.fold({
             handlerCode.value = handler_code_collect
@@ -71,12 +61,7 @@ class ProjectViewModel : BaseViewModel() {
 
     fun unCollectList(id: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.unCollectList(id)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.errorCode)
-            } else {
-                BaseResult.failure(Throwable("Failed to unCollect${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.unCollectList(id)) }
         }
         baseResponse.fold({
             handlerCode.value = handler_code_un_collect

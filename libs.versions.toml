@@ -6,22 +6,18 @@
 [versions]
 # android defaultConfig
 minsdk = "24"
-targetsdk = "32"
-compilesdk = "32"
+targetsdk = "31"
+compilesdk = "31"
 versioncode = "103"
 versionname = "1.0.3"
 
 # SDK
-gradle = "7.0.3"
 kotlin = "1.6.10"
 lifecycle = "2.4.0"
 retrofit = "2.9.0"
 glide = "4.12.0"
 
 [libraries]
-gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-
 # androidX
 core-ktx = "androidx.core:core-ktx:1.7.0"
 appcompat = "androidx.appcompat:appcompat:1.3.1"
@@ -46,7 +42,6 @@ utilcodex = "com.blankj:utilcodex:1.30.6"
 basepopup = "io.github.razerdp:BasePopup:3.2.0"
 # permissionx
 permissionx = "com.guolindev.permissionx:permissionx:1.6.0"
-# rxbinding3 = "com.jakewharton.rxbinding3:rxbinding:3.0.0"
 # 连点 防抖动
 rxbinding = "com.jakewharton.rxbinding4:rxbinding:4.0.0"
 # material-dialogs
@@ -73,7 +68,6 @@ glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = 
 glide-transformations = "jp.wasabeef:glide-transformations:4.3.0"
 
 [bundles]
-gradle = ["gradle", "kotlin-gradle-plugin"]
 glide = ["glide-core", "glide-compiler", "glide-transformations"]
 androidx = ["core-ktx", "appcompat", "material", "fragment", "constraintlayout", "recyclerview", "cardview"]
 lifecycle = ["lifecycle-runtime", "lifecycle-livedata", "lifecycle-viewmodel"]

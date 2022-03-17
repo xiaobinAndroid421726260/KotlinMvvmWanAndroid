@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.kotlin.mvvm.R
+import com.kotlin.mvvm.ext.checkLogin
 import com.kotlin.mvvm.ext.onClick
 import com.kotlin.mvvm.ext.startWebViewActivity
 
@@ -29,7 +30,7 @@ class SquareAdapter : BaseQuickAdapter<SquareBean, BaseViewHolder>(R.layout.item
         holder.setGone(R.id.tv_article_tag, item.tags.isEmpty())
         holder.setText(
             R.id.tv_name,
-            if (item.author.isNotEmpty()) item.author else item.shareUser
+            item.author.ifEmpty { item.shareUser }
         )
         holder.setText(R.id.tv_time, item.niceDate)
         val imageView = holder.getView<ImageView>(R.id.image)
@@ -48,7 +49,9 @@ class SquareAdapter : BaseQuickAdapter<SquareBean, BaseViewHolder>(R.layout.item
         )
         holder.itemView.onClick { startWebViewActivity(item.id, item.link, item.title) }
         holder.getView<AppCompatImageView>(R.id.iv_collection).onClick {
-            listener.invoke(item.collect, item.id, getItemPosition(item))
+            checkLogin {
+                listener.invoke(item.collect, item.id, getItemPosition(item))
+            }
         }
     }
 

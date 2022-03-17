@@ -3,8 +3,14 @@ package com.kotlin.mvvm.ui.home
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
-import com.kotlin.mvvm.common.*
+import com.kotlin.mvvm.common.UiState
+import com.kotlin.mvvm.common.base.BaseListResponse
+import com.kotlin.mvvm.common.base.fold
+import com.kotlin.mvvm.common.handler_code_collect
+import com.kotlin.mvvm.common.handler_code_un_collect
 import com.kotlin.mvvm.network.RetrofitFactory
+import com.kotlin.mvvm.network.callRequest
+import com.kotlin.mvvm.network.handlerResponse
 import com.kotlin.mvvm.ui.home.bean.BannerBean
 import com.kotlin.mvvm.ui.home.bean.HomeBean
 import io.reactivex.rxjava3.core.Observable
@@ -28,12 +34,7 @@ class HomeViewModel : BaseViewModel() {
 
     fun getBannerJson() = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val bannerBean = RetrofitFactory.instance.service.getBannerJson()
-            if (bannerBean.errorCode == 0) {
-                BaseResult.success(bannerBean.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getBannerJson${bannerBean.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getBannerJson()) }
         }
         baseResponse.fold({
             setBannerUrl(it)
@@ -70,12 +71,7 @@ class HomeViewModel : BaseViewModel() {
 
     fun getTopBeanJson(page: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val topJson = RetrofitFactory.instance.service.getTopJson()
-            if (topJson.errorCode == 0) {
-                BaseResult.success(topJson.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getTopJson${topJson.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getTopJson()) }
         }
         baseResponse.fold({
             reHomeBeanData(it, page)
@@ -111,12 +107,7 @@ class HomeViewModel : BaseViewModel() {
 
     private fun getArticleJson(page: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val articleJson = RetrofitFactory.instance.service.getArticleJson(page)
-            if (articleJson.errorCode == 0) {
-                BaseResult.success(articleJson.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getArticleJson${articleJson.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getArticleJson(page)) }
         }
         baseResponse.fold({
             mHomeBeans.addAll(it.datas)
@@ -130,12 +121,7 @@ class HomeViewModel : BaseViewModel() {
 
     fun collect(id: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.collectList(id)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.errorCode)
-            } else {
-                BaseResult.failure(Throwable("Failed to collect${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.collectList(id)) }
         }
         baseResponse.fold({
             handlerCode.value = handler_code_collect
@@ -146,12 +132,7 @@ class HomeViewModel : BaseViewModel() {
 
     fun unCollectList(id: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.unCollectList(id)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.errorCode)
-            } else {
-                BaseResult.failure(Throwable("Failed to unCollect${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.unCollectList(id)) }
         }
         baseResponse.fold({
             handlerCode.value = handler_code_un_collect

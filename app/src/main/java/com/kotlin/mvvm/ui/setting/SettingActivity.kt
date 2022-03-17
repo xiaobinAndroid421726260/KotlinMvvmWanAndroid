@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.color.ColorChooserDialog
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.databinding.ActivitySettingBinding
@@ -56,6 +57,7 @@ class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
         }
         binding.tvLogout.onClick { mViewModel.logout() }
         mViewModel.handlerCode.observe(this) {
+            ToastUtils.showShort(StringUtils.getString(R.string.logout))
             saveUser("")
             CookieClass.clearCookie()
             binding.tvLogout.invisible()

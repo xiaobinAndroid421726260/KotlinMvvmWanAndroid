@@ -12,7 +12,7 @@ import android.util.Log
 
 private var allow: Boolean = true
 
-private const val TAG = "-----LogUtils: "
+private const val TAG = "---LogUtils: "
 
 fun d(msg: String?) {
     d(TAG, msg)

@@ -1,8 +1,8 @@
 package com.kotlin.mvvm.api
 
-import com.kotlin.mvvm.common.BaseListResponse
-import com.kotlin.mvvm.common.BaseResponse
 import com.kotlin.mvvm.common.UserInfoBean
+import com.kotlin.mvvm.common.base.BaseListResponse
+import com.kotlin.mvvm.common.base.BaseResponse
 import com.kotlin.mvvm.ui.collect.CollectBean
 import com.kotlin.mvvm.ui.home.bean.BannerBean
 import com.kotlin.mvvm.ui.home.bean.HomeBean
@@ -24,6 +24,7 @@ import com.kotlin.mvvm.ui.system.bean.NaviBean
 import com.kotlin.mvvm.ui.system.bean.SystemBean
 import com.kotlin.mvvm.ui.wechat.bean.WechatBean
 import com.kotlin.mvvm.ui.wechat.bean.WechatPagerBean
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
 /**
@@ -72,6 +73,12 @@ interface Api {
      */
     @GET(HttpsApi.banner)
     suspend fun getBannerJson(): BaseResponse<List<BannerBean>>
+
+    /**
+     * 首页banner
+     */
+    @GET(HttpsApi.banner)
+    fun getBannerJson1(): Observable<BaseResponse<List<BannerBean>>>
 
     /**
      * 首页置顶文章

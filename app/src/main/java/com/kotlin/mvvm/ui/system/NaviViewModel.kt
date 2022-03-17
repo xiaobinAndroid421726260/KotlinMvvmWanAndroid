@@ -3,9 +3,10 @@ package com.kotlin.mvvm.ui.system
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
-import com.kotlin.mvvm.common.BaseResult
-import com.kotlin.mvvm.common.fold
+import com.kotlin.mvvm.common.base.fold
 import com.kotlin.mvvm.network.RetrofitFactory
+import com.kotlin.mvvm.network.callRequest
+import com.kotlin.mvvm.network.handlerResponse
 import com.kotlin.mvvm.ui.system.bean.NaviBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -22,11 +23,8 @@ class NaviViewModel : BaseViewModel() {
 
     fun getNaviJson() = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.getNaviJson()
-            if (result.errorCode == 0){
-                BaseResult.success(result.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getNaviJson${result.errorMsg}"))
+            callRequest {
+                handlerResponse(RetrofitFactory.instance.service.getNaviJson())
             }
         }
         baseResponse.fold({

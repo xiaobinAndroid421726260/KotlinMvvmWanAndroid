@@ -3,11 +3,12 @@ package com.kotlin.mvvm.ui.integral
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.kotlin.mvvm.base.BaseViewModel
-import com.kotlin.mvvm.common.BaseListResponse
-import com.kotlin.mvvm.common.BaseResult
 import com.kotlin.mvvm.common.UiState
-import com.kotlin.mvvm.common.fold
+import com.kotlin.mvvm.common.base.BaseListResponse
+import com.kotlin.mvvm.common.base.fold
 import com.kotlin.mvvm.network.RetrofitFactory
+import com.kotlin.mvvm.network.callRequest
+import com.kotlin.mvvm.network.handlerResponse
 import com.kotlin.mvvm.ui.integral.bean.IntegralBean
 import com.kotlin.mvvm.ui.integral.bean.RankBean
 import com.kotlin.mvvm.ui.integral.bean.UserIntegralBean
@@ -28,12 +29,7 @@ class IntegralViewModel : BaseViewModel() {
 
     fun getMyIntegralList(page: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.getMyIntegralList(page)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getMyIntegralList${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getMyIntegralList(page)) }
         }
         baseResponse.fold({
             mIntegralBean.value = it
@@ -45,12 +41,7 @@ class IntegralViewModel : BaseViewModel() {
     fun getMyIntegral() = launchUI {
         uiState.value = UiState.Loading
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.getMyIntegral()
-            if (result.errorCode == 0) {
-                BaseResult.success(result.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getMyIntegral${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getMyIntegral()) }
         }
         baseResponse.fold({
             mUserIntegralBean.value = it
@@ -63,12 +54,7 @@ class IntegralViewModel : BaseViewModel() {
 
     fun getIntegralRank(page: Int) = launchUI {
         val baseResponse = withContext(Dispatchers.IO) {
-            val result = RetrofitFactory.instance.service.getIntegralRank(page)
-            if (result.errorCode == 0) {
-                BaseResult.success(result.data)
-            } else {
-                BaseResult.failure(Throwable("Failed to getMyIntegral${result.errorMsg}"))
-            }
+            callRequest { handlerResponse(RetrofitFactory.instance.service.getIntegralRank(page)) }
         }
         baseResponse.fold({
             mRankBean.value = it

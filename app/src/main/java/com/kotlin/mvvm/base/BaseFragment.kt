@@ -1,5 +1,6 @@
 package com.kotlin.mvvm.base
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -99,6 +100,7 @@ abstract class BaseFragment : Fragment(), CustomAdapt, BaseView {
     /**
      * 监听加载的UI用户界面状态
      */
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     fun refreshUiState(uiState: MutableStateFlow<UiState>) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -194,11 +196,11 @@ abstract class BaseFragment : Fragment(), CustomAdapt, BaseView {
         mDisposable?.clear()
     }
 
-    fun showLoadView() {
+    private fun showLoadView() {
         activity?.let { LoadingView.getInstance(it).showPopupWindow() }
     }
 
-    fun dismissLoadView() {
+    private fun dismissLoadView() {
         activity?.let { LoadingView.getInstance(it).delayDismiss() }
     }
 

@@ -5,6 +5,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.kotlin.mvvm.R
+import com.kotlin.mvvm.ext.checkLogin
 import com.kotlin.mvvm.ext.onClick
 import com.kotlin.mvvm.ext.startWebViewActivity
 
@@ -30,7 +31,9 @@ class CollectAdapter : BaseQuickAdapter<CollectBean, BaseViewHolder>(R.layout.it
         )
         holder.itemView.onClick { startWebViewActivity(item.id, item.link, item.title) }
         holder.getView<AppCompatImageView>(R.id.iv_collection).onClick {
-            listener.invoke(item.collect, item.id, item.originId, getItemPosition(item))
+            checkLogin {
+                listener.invoke(item.collect, item.id, item.originId, getItemPosition(item))
+            }
         }
     }
 

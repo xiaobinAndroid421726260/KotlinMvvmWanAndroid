@@ -14,17 +14,17 @@ import com.kotlin.mvvm.ext.onClick
  */
 class HistoryAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_search_history) {
 
-    private lateinit var mDeteleListener: (k: String) -> Unit
+    private lateinit var mDeleteListener: (k: String) -> Unit
     private lateinit var mSearchListener: (k: String) -> Unit
 
     override fun convert(holder: BaseViewHolder, item: String) {
         holder.setText(R.id.tv_name, item)
-        holder.getView<AppCompatImageView>(R.id.iv_delete).onClick { mDeteleListener.invoke(item) }
+        holder.getView<AppCompatImageView>(R.id.iv_delete).onClick { mDeleteListener.invoke(item) }
         holder.itemView.onClick { mSearchListener.invoke(item) }
     }
 
     fun setOnDeleteListener(listener: (k: String) -> Unit) {
-        mDeteleListener = listener
+        mDeleteListener = listener
     }
 
     fun setOnSearchListener(listener: (k: String) -> Unit) {
