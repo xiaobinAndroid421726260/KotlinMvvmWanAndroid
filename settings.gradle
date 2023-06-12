@@ -16,10 +16,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "KotlinMvvmWanAndroid"
 include ':app'
-include ':LocalPackage:AutoSize_aar'
-include ':LocalPackage:Banner_aar'
 include ':LocalPackage:LoadSir_aar'
-include ':LocalPackage:CircleImageView_aar'
 include ':LocalPackage:ImmersionBar_aar'
 include ':LocalPackage:ImmersionBar_Components_aar'
 include ':LocalPackage:ImmersionBar_Ktx_aar'

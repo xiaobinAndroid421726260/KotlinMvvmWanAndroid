@@ -48,10 +48,16 @@ rxbinding = "com.jakewharton.rxbinding4:rxbinding:4.0.0"
 commons-dialogs = "com.afollestad.material-dialogs:commons:0.9.6.0"
 # splashscreen
 splashscreen = "androidx.core:core-splashscreen:1.0.0-alpha02"
+# AndroidAutoSize
+androidAutoSize = "com.github.JessYanCoding:AndroidAutoSize:v1.2.1"
+# banner
+banner = "io.github.youth5201314:banner:2.2.2"
 # PersistentCookieJar
 persistent-cookie-jar = "com.github.franmontiel:PersistentCookieJar:v1.0.1"
 # AgentWeb
 agentWeb = "com.github.Justson.AgentWeb:agentweb-core:v5.0.0-alpha.1-androidx"
+# circleimageview
+circleimageview = "de.hdodenhof:circleimageview:3.1.0"
 # okhttp 日志拦截器
 logging-interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.2"
 # RxAndroid

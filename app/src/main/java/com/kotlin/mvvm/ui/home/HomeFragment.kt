@@ -65,7 +65,7 @@ class HomeFragment : BaseFragment(), ScrollToTop {
         }
         mViewModel.run {
             mBannerLists.observe(this@HomeFragment) {
-                banner.adapter = HomeBannerAdapter(it)
+                banner.setAdapter(HomeBannerAdapter(it), true)
                 mViewModel.getTopBeanJson(page)
             }
             mDataBeans.observe(this@HomeFragment) {
